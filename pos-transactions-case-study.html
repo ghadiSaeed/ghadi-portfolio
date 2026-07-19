@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS Transactions Insights | Case Study - Ghadi Saeed</title>
+    <meta name="description" content="Case study for POS Transactions Insights Dashboard - Saudi National Bank (SNB).">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           CSS VARIABLES & GLOBAL STYLES (Matching Main Portfolio)
+           ========================================================================== */
+        :root {
+            --bg-base: #EEE8E5; 
+            --bg-glass: rgba(255, 255, 255, 0.6); 
+            --bg-glass-hover: rgba(255, 255, 255, 0.9);
+            --glass-border: rgba(90, 68, 82, 0.1); 
+            
+            --primary: #5A4452; 
+            --secondary: #A7AFC2; 
+            --accent: #E8BBB6; 
+            --tertiary: #C8D0CF; 
+            
+            --text-main: #5A4452; 
+            --text-muted: #7a6b74; 
+            
+            --font-en: 'Inter', sans-serif;
+            --font-ar: 'Cairo', sans-serif;
+            
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --radius-md: 16px;
+            --radius-lg: 24px;
+        }
+
+        html[lang="en"] { font-family: var(--font-en); }
+        html[lang="ar"] { font-family: var(--font-ar); }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-base); color: var(--text-main); line-height: 1.7; overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* Background Glows */
+        .bg-glow {
+            position: fixed; border-radius: 50%; filter: blur(120px); z-index: -1; opacity: 0.6; 
+            animation: floatGlow 10s infinite alternate;
+        }
+        .glow-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: rgba(232, 187, 182, 0.4); } 
+        .glow-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: rgba(167, 175, 194, 0.4); } 
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 30px) scale(1.1); }
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 { color: var(--text-main); font-weight: 700; line-height: 1.3; }
+        p { color: var(--text-muted); margin-bottom: 1rem; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { padding-left: 1.5rem; margin-bottom: 1.5rem; color: var(--text-muted); }
+        [dir="rtl"] ul { padding-left: 0; padding-right: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title {
+            font-size: 2rem; margin-bottom: 2rem; color: var(--primary);
+            border-bottom: 2px solid rgba(90, 68, 82, 0.1); padding-bottom: 0.5rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.5rem;
+            border-radius: 30px; font-weight: 600; cursor: pointer; transition: var(--transition);
+            border: 1px solid transparent; font-family: inherit;
+        }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), #7c6273); color: #EEE8E5; box-shadow: 0 4px 15px rgba(90, 68, 82, 0.2); }
+        .btn-primary:hover { box-shadow: 0 6px 20px rgba(90, 68, 82, 0.3); transform: translateY(-2px); color: #fff; }
+        .btn-outline { background: var(--bg-glass); border-color: var(--glass-border); color: var(--primary); backdrop-filter: blur(10px); }
+        .btn-outline:hover { background: var(--bg-glass-hover); border-color: var(--primary); transform: translateY(-2px); }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 5rem 2rem; }
+
+        /* Navbar */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 1.5rem 2rem;
+            background: rgba(238, 232, 229, 0.85); backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border); z-index: 900;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); letter-spacing: 1px; }
+
+        /* Lang Switcher */
+        .lang-switch {
+            background: var(--bg-glass);
+            border: 1px solid var(--glass-border);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+            margin-left: auto;
+            margin-right: 1rem;
+        }
+        [dir="rtl"] .lang-switch { margin-left: 1rem; margin-right: auto; }
+        .lang-switch:hover { background: var(--bg-glass-hover); border-color: var(--primary); }
+
+        /* Case Study Specific Layouts */
+        .hero-section {
+            padding-top: 120px; text-align: center; margin-bottom: 4rem;
+        }
+        .hero-section h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .hero-section p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem auto; }
+        .hero-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+
+        .content-box {
+            background: var(--bg-glass); border: 1px solid var(--glass-border);
+            padding: 3rem; border-radius: var(--radius-lg); margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(90, 68, 82, 0.03); backdrop-filter: blur(10px);
+        }
+        
+        .dashboard-img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(90, 68, 82, 0.1);
+            margin-bottom: 2rem;
+            border: 1px solid var(--glass-border);
+        }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        
+        .feature-list li, .tech-list li {
+            list-style: none; position: relative; padding-left: 1.5rem;
+        }
+        [dir="rtl"] .feature-list li, [dir="rtl"] .tech-list li {
+            padding-left: 0; padding-right: 1.5rem;
+        }
+        .feature-list li::before, .tech-list li::before {
+            content: '\f00c'; font-family: 'FontAwesome'; position: absolute;
+            left: 0; color: var(--primary); font-size: 0.9rem; top: 2px;
+        }
+        [dir="rtl"] .feature-list li::before, [dir="rtl"] .tech-list li::before {
+            left: auto; right: 0;
+        }
+
+        /* ANAH Style Challenge Card */
+        .challenge-card {
+            background: rgba(255, 255, 255, 0.4); border: 1px solid rgba(90, 68, 82, 0.1);
+            padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;
+        }
+        .challenge-card h4 { color: #d9534f; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .challenge-card h4.solution { color: #5cb85c; margin-top: 1rem; }
+
+        footer { text-align: center; padding: 2rem; border-top: 1px solid var(--glass-border); font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2.2rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .content-box { padding: 2rem; }
+            .hero-actions { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Effects -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo" data-i18n="logo">Ghaday.</div>
+        <button class="lang-switch" id="langSwitch" aria-label="Toggle Language">
+            <i class="fa-solid fa-globe"></i> <span id="langText">عربي</span>
+        </button>
+        <a href="index.html" class="btn btn-outline" style="padding: 0.5rem 1rem;">
+            <i class="fa-solid fa-arrow-left" id="backIcon"></i> <span data-i18n="btn_back">Back to Portfolio</span>
+        </a>
+    </nav>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1 class="text-gradient" data-i18n="hero_title">POS Transactions Insights</h1>
+            <h3 style="margin-bottom: 1rem; color: var(--primary);" data-i18n="hero_subtitle">Saudi National Bank (SNB)</h3>
+            <p data-i18n="hero_desc">A comprehensive Power BI dashboard developed during a Data Engineering internship to analyze over 450,000 Point-of-Sale (POS) transactions.</p>
+            <div class="hero-actions">
+                <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-home"></i> <span data-i18n="btn_portfolio">Portfolio</span></a>
+            </div>
+        </div>
+        
+        <img src="assets/images/PHOTO-2025-07-31-14-43-35.jpg" alt="SNB Dashboard" class="dashboard-img">
+
+        <!-- Project Overview -->
+        <div class="content-box">
+            <h2 class="section-title" data-i18n="sec_overview">Overview & Objectives</h2>
+            <p data-i18n="overview_p1">During an intensive 8-week summer internship at the Data Engineering Department of Saudi National Bank (SNB)—the largest banking entity in the Kingdom of Saudi Arabia—I was tasked with developing an analytical pipeline and dashboard for Point of Sale (POS) transactions.</p>
+            <p data-i18n="overview_p2">The primary objective was to consolidate fragmented, raw financial data spanning three months into a unified, queryable dataset. This involved robust ETL processes, data cleansing, and dimensional data modeling to produce an interactive Business Intelligence dashboard capable of tracking KPIs, evaluating card network performance, and identifying geographic spending trends.</p>
+        </div>
+
+        <!-- Key Features -->
+        <div class="content-box">
+            <h2 class="section-title" data-i18n="sec_features">Dashboard Features & Insights</h2>
+            <p data-i18n="features_desc">The final dashboard successfully processed 450K transactions representing 179.88M SAR in volume. Key features included:</p>
+            <ul class="feature-list" style="column-count: 2; column-gap: 2rem;">
+                <li data-i18n="feat_1"><strong>KPI Tracking:</strong> Instant visibility into Total Transaction Count and Total Amount.</li>
+                <li data-i18n="feat_2"><strong>Card Network Analysis:</strong> Donut charts comparing Mada, Visa, and MasterCard by volume and value. Mada accounted for ~70% of the total transaction amount.</li>
+                <li data-i18n="feat_3"><strong>Geographic Mapping:</strong> Interactive map visuals to analyze transactions across different cities and regions.</li>
+                <li data-i18n="feat_4"><strong>Business Type Leaderboards:</strong> Bar charts identifying the top 20 business categories by frequency (e.g., Fast Food, Supermarkets) and monetary value (e.g., Mobile Shops, Electronics).</li>
+                <li data-i18n="feat_5"><strong>Customer Insights:</strong> Ranking the top 20 customers by transaction count and amount to identify high-value demographics.</li>
+                <li data-i18n="feat_6"><strong>Dynamic Filtering:</strong> Global slicers allowing data segmentation by Time Period, Customer ID (CIF), and Relationship Manager (RM).</li>
+            </ul>
+        </div>
+
+        <!-- Technologies & My Role Grid -->
+        <div class="grid-2">
+            <div class="content-box">
+                <h2 class="section-title" data-i18n="sec_tech">Technologies Used</h2>
+                <ul class="tech-list">
+                    <li data-i18n="tech_1"><strong>Data Warehouse:</strong> Google BigQuery</li>
+                    <li data-i18n="tech_2"><strong>Data Processing:</strong> Advanced SQL, Microsoft Excel</li>
+                    <li data-i18n="tech_3"><strong>Visualization:</strong> Power BI, DAX</li>
+                    <li data-i18n="tech_4"><strong>Data Governance Exposure:</strong> Axon, IDQ Analyst, Informatica Developer</li>
+                </ul>
+            </div>
+            <div class="content-box" style="border-color: var(--primary); background: rgba(255, 255, 255, 0.8);">
+                <h2 class="section-title" style="border-bottom-color: var(--primary);" data-i18n="sec_role">My Role</h2>
+                <ul class="tech-list" style="color: var(--text-main);">
+                    <li data-i18n="role_1">Reviewed Business Requirement Documents (BRDs) to understand business needs and translate them into technical solutions.</li>
+                    <li data-i18n="role_2">Executed ETL workflows, using SQL to handle null values, remove duplicates, and resolve formatting inconsistencies.</li>
+                    <li data-i18n="role_3">Designed an Entity Relationship Diagram (ERD) connecting core tables (customers, accounts, transactions).</li>
+                    <li data-i18n="role_4">Architected a Star Schema (Fact and Dimension tables) optimized for BI reporting.</li>
+                    <li data-i18n="role_5">Developed and refined the interactive Power BI dashboard for presentation to the department manager.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Challenges & Solutions -->
+        <div class="content-box">
+            <h2 class="section-title" data-i18n="sec_challenges">Challenges & Solutions</h2>
+            
+            <div class="challenge-card">
+                <h4><i class="fa-solid fa-triangle-exclamation"></i> <span data-i18n="ch1_title">Handling Large Data Volumes</span></h4>
+                <p data-i18n="ch1_desc">Consolidating three months of raw data with over 150,000 rows per month posed performance challenges.</p>
+                <h4 class="solution"><i class="fa-solid fa-check-circle"></i> <span data-i18n="lbl_solution">Solution</span></h4>
+                <p data-i18n="ch1_sol">Leveraged Excel for initial consolidation, and then relied on Google BigQuery's scalable infrastructure to handle the heavy computational load during processing.</p>
+            </div>
+            
+            <div class="challenge-card">
+                <h4><i class="fa-solid fa-triangle-exclamation"></i> <span data-i18n="ch2_title">SQL Query Optimization</span></h4>
+                <p data-i18n="ch2_desc">Writing complex joins across massive banking datasets initially resulted in slow execution times.</p>
+                <h4 class="solution"><i class="fa-solid fa-check-circle"></i> <span data-i18n="lbl_solution">Solution</span></h4>
+                <p data-i18n="ch2_sol">Optimized query architecture by selecting only the required columns, optimizing joins, partitioning the data, and refining query structures to significantly reduce execution time.</p>
+            </div>
+            
+            <div class="challenge-card">
+                <h4><i class="fa-solid fa-triangle-exclamation"></i> <span data-i18n="ch3_title">Complex Data Modeling for Power BI</span></h4>
+                <p data-i18n="ch3_desc">Establishing accurate cross-filtering without creating ambiguous one-to-many cardinality conflicts.</p>
+                <h4 class="solution"><i class="fa-solid fa-check-circle"></i> <span data-i18n="lbl_solution">Solution</span></h4>
+                <p data-i18n="ch3_sol">Transitioned the data from a transactional state to an analytical state by implementing a strict Star Schema, effectively separating measurable facts from descriptive dimensions.</p>
+            </div>
+        </div>
+
+        <!-- Project Outcomes -->
+        <div class="content-box">
+            <h2 class="section-title" data-i18n="sec_outcomes">Project Outcomes & Lessons Learned</h2>
+            <p data-i18n="outcomes_p1">The successful delivery of the "POS Transactions Insights" dashboard provided SNB stakeholders with a clear, data-driven narrative of consumer spending behaviors. The project demonstrated my ability to take raw, fragmented banking data and engineer it into a reliable, business-ready dashboard.</p>
+            <p data-i18n="outcomes_p2">Beyond technical development, the internship bridged the gap between academic theory and corporate application. It highlighted the critical importance of rigorous data governance, robust ETL testing, and the art of data storytelling—proving that successful data engineering is about translating complex schemas into compelling, actionable business narratives.</p>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> <span data-i18n="footer_text">Ghadi Saeed. Case Study Document.</span></p>
+    </footer>
+
+    <!-- Translation Logic -->
+    <script>
+        const translations = {
+            en: {
+                logo: "Ghaday.",
+                btn_back: "Back to Portfolio",
+                hero_title: "POS Transactions Insights",
+                hero_subtitle: "Saudi National Bank (SNB)",
+                hero_desc: "A comprehensive Power BI dashboard developed during a Data Engineering internship to analyze over 450,000 Point-of-Sale (POS) transactions.",
+                btn_portfolio: "Portfolio",
+                sec_overview: "Overview & Objectives",
+                overview_p1: "During an intensive 8-week summer internship at the Data Engineering Department of Saudi National Bank (SNB)—the largest banking entity in the Kingdom of Saudi Arabia—I was tasked with developing an analytical pipeline and dashboard for Point of Sale (POS) transactions.",
+                overview_p2: "The primary objective was to consolidate fragmented, raw financial data spanning three months into a unified, queryable dataset. This involved robust ETL processes, data cleansing, and dimensional data modeling to produce an interactive Business Intelligence dashboard capable of tracking KPIs, evaluating card network performance, and identifying geographic spending trends.",
+                sec_features: "Dashboard Features & Insights",
+                features_desc: "The final dashboard successfully processed 450K transactions representing 179.88M SAR in volume. Key features included:",
+                feat_1: "<strong>KPI Tracking:</strong> Instant visibility into Total Transaction Count and Total Amount.",
+                feat_2: "<strong>Card Network Analysis:</strong> Donut charts comparing Mada, Visa, and MasterCard by volume and value. Mada accounted for ~70% of the total transaction amount.",
+                feat_3: "<strong>Geographic Mapping:</strong> Interactive map visuals to analyze transactions across different cities and regions.",
+                feat_4: "<strong>Business Type Leaderboards:</strong> Bar charts identifying the top 20 business categories by frequency (e.g., Fast Food, Supermarkets) and monetary value (e.g., Mobile Shops, Electronics).",
+                feat_5: "<strong>Customer Insights:</strong> Ranking the top 20 customers by transaction count and amount to identify high-value demographics.",
+                feat_6: "<strong>Dynamic Filtering:</strong> Global slicers allowing data segmentation by Time Period, Customer ID (CIF), and Relationship Manager (RM).",
+                sec_tech: "Technologies Used",
+                tech_1: "<strong>Data Warehouse:</strong> Google BigQuery",
+                tech_2: "<strong>Data Processing:</strong> Advanced SQL, Microsoft Excel",
+                tech_3: "<strong>Visualization:</strong> Power BI, DAX",
+                tech_4: "<strong>Data Governance Exposure:</strong> Axon, IDQ Analyst, Informatica Developer",
+                sec_role: "My Role",
+                role_1: "Reviewed Business Requirement Documents (BRDs) to understand business needs and translate them into technical solutions.",
+                role_2: "Executed ETL workflows, using SQL to handle null values, remove duplicates, and resolve formatting inconsistencies.",
+                role_3: "Designed an Entity Relationship Diagram (ERD) connecting core tables (customers, accounts, transactions).",
+                role_4: "Architected a Star Schema (Fact and Dimension tables) optimized for BI reporting.",
+                role_5: "Developed and refined the interactive Power BI dashboard for presentation to the department manager.",
+                sec_challenges: "Challenges & Solutions",
+                ch1_title: "Handling Large Data Volumes",
+                ch1_desc: "Consolidating three months of raw data with over 150,000 rows per month posed performance challenges.",
+                lbl_solution: "Solution",
+                ch1_sol: "Leveraged Excel for initial consolidation, and then relied on Google BigQuery's scalable infrastructure to handle the heavy computational load during processing.",
+                ch2_title: "SQL Query Optimization",
+                ch2_desc: "Writing complex joins across massive banking datasets initially resulted in slow execution times.",
+                ch2_sol: "Optimized query architecture by selecting only the required columns, optimizing joins, partitioning the data, and refining query structures to significantly reduce execution time.",
+                ch3_title: "Complex Data Modeling for Power BI",
+                ch3_desc: "Establishing accurate cross-filtering without creating ambiguous one-to-many cardinality conflicts.",
+                ch3_sol: "Transitioned the data from a transactional state to an analytical state by implementing a strict Star Schema, effectively separating measurable facts from descriptive dimensions.",
+                sec_outcomes: "Project Outcomes & Lessons Learned",
+                outcomes_p1: "The successful delivery of the \"POS Transactions Insights\" dashboard provided SNB stakeholders with a clear, data-driven narrative of consumer spending behaviors. The project demonstrated my ability to take raw, fragmented banking data and engineer it into a reliable, business-ready dashboard.",
+                outcomes_p2: "Beyond technical development, the internship bridged the gap between academic theory and corporate application. It highlighted the critical importance of rigorous data governance, robust ETL testing, and the art of data storytelling—proving that successful data engineering is about translating complex schemas into compelling, actionable business narratives.",
+                footer_text: "Ghadi Saeed. Case Study Document."
+            },
+            ar: {
+                logo: "غدي.",
+                btn_back: "العودة إلى Portfolio",
+                hero_title: "رؤى عمليات نقاط البيع",
+                hero_subtitle: "Saudi National Bank (SNB)",
+                hero_desc: "لوحة تحكم Power BI شاملة تم تطويرها خلال فترة تدريب في هندسة البيانات لتحليل أكثر من 450,000 عملية نقاط بيع (POS).",
+                btn_portfolio: "ملف الأعمال",
+                sec_overview: "نظرة عامة والأهداف",
+                overview_p1: "خلال فترة تدريب صيفي مكثفة لمدة 8 أسابيع في قسم هندسة البيانات في Saudi National Bank (SNB) — أكبر كيان مصرفي في المملكة العربية السعودية — كُلفت بتطوير مسار تحليلي ولوحة تحكم لعمليات نقاط البيع (POS).",
+                overview_p2: "كان الهدف الأساسي هو دمج البيانات المالية الخام والمجزأة على مدار ثلاثة أشهر في مجموعة بيانات موحدة وقابلة للاستعلام. تضمن ذلك عمليات ETL قوية، وتنظيف البيانات، ونمذجة البيانات متعددة الأبعاد (dimensional data modeling) لإنتاج لوحة تحكم ذكاء أعمال تفاعلية قادرة على تتبع الـ KPIs، وتقييم أداء شبكة البطاقات، وتحديد اتجاهات الإنفاق الجغرافي.",
+                sec_features: "ميزات لوحة التحكم والرؤى",
+                features_desc: "عالجت لوحة التحكم النهائية بنجاح 450K عملية تمثل حجم تداول يبلغ 179.88M SAR. شملت الميزات الرئيسية ما يلي:",
+                feat_1: "<strong>تتبع الـ KPI:</strong> عرض فوري لإجمالي عدد العمليات وإجمالي قيمة العمليات.",
+                feat_2: "<strong>تحليل شبكة البطاقات:</strong> مخططات دائرية تقارن بين مدى، وفيزا، وماستركارد من حيث الحجم والقيمة. شكلت عمليات مدى حوالي 70% من إجمالي مبلغ العمليات.",
+                feat_3: "<strong>التوزيع الجغرافي:</strong> خرائط تفاعلية لتحليل العمليات عبر مختلف المدن والمناطق.",
+                feat_4: "<strong>قوائم الصدارة لأنواع الأعمال:</strong> مخططات شريطية تحدد أفضل 20 فئة تجارية من حيث التكرار (مثل الوجبات السريعة، ومحلات السوبر ماركت) والقيمة المالية (مثل محلات الهواتف المحمولة، والإلكترونيات).",
+                feat_5: "<strong>رؤى العملاء:</strong> تصنيف أفضل 20 عميلاً حسب عدد العمليات والمبلغ لتحديد الشرائح ذات القيمة العالية.",
+                feat_6: "<strong>تصفية ديناميكية:</strong> أدوات تصفية شاملة تتيح تقسيم البيانات حسب الفترة الزمنية، ومعرف العميل (CIF)، ومدير العلاقات (RM).",
+                sec_tech: "التقنيات المستخدمة",
+                tech_1: "<strong>مستودع البيانات:</strong> Google BigQuery",
+                tech_2: "<strong>معالجة البيانات:</strong> SQL المتقدم، Microsoft Excel",
+                tech_3: "<strong>تصوير البيانات:</strong> Power BI و DAX",
+                tech_4: "<strong>الاطلاع على حوكمة البيانات:</strong> Axon و IDQ Analyst و Informatica Developer",
+                sec_role: "دوري",
+                role_1: "مراجعة وثائق متطلبات الأعمال (BRD) لفهم احتياجات العمل وترجمتها إلى حلول تقنية.",
+                role_2: "تنفيذ مسارات عمل ETL، باستخدام SQL للتعامل مع القيم الفارغة، وإزالة التكرارات، ومعالجة التناقضات في التنسيق.",
+                role_3: "تصميم مخطط الكيانات والعلاقات (ERD) لربط الجداول الأساسية (العملاء، الحسابات، العمليات).",
+                role_4: "بناء نموذج Star Schema (جداول الحقائق والأبعاد) محسّن لتقارير ذكاء الأعمال (BI).",
+                role_5: "تطوير وتحسين لوحة تحكم Power BI التفاعلية لعرضها على مدير القسم.",
+                sec_challenges: "التحديات والحلول",
+                ch1_title: "التعامل مع أحجام البيانات الكبيرة",
+                ch1_desc: "شكل دمج ثلاثة أشهر من البيانات الخام مع أكثر من 150,000 صف شهرياً تحديات في الأداء.",
+                lbl_solution: "الحل",
+                ch1_sol: "تم استخدام Excel للدمج الأولي، ثم الاعتماد على البنية التحتية القابلة للتطوير في Google BigQuery للتعامل مع العبء الحسابي الثقيل أثناء المعالجة.",
+                ch2_title: "تحسين استعلامات SQL",
+                ch2_desc: "أدت كتابة عمليات الربط (joins) المعقدة عبر مجموعات بيانات مصرفية ضخمة في البداية إلى أوقات تنفيذ بطيئة.",
+                ch2_sol: "تم تحسين بنية الاستعلام عن طريق تحديد الأعمدة المطلوبة فقط، وتحسين عمليات الربط، وتقسيم البيانات، وتطوير هياكل الاستعلامات لتقليل وقت التنفيذ بشكل كبير.",
+                ch3_title: "نمذجة البيانات المعقدة لـ Power BI",
+                ch3_desc: "إنشاء تصفية متقاطعة (cross-filtering) دقيقة دون التسبب في تعارضات غامضة في العلاقات من واحد إلى متعدد (one-to-many cardinality).",
+                ch3_sol: "تم تحويل البيانات من نموذج تشغيلي (Transactional Model) إلى نموذج تحليلي (Analytical Model) من خلال تطبيق نموذج Star Schema، مما ساهم في تنظيم البيانات وتحسين أداء التحليل وإعداد التقارير.",
+                sec_outcomes: "النتائج والدروس المستفادة",
+                outcomes_p1: "قدم التسليم الناجح للوحة تحكم \"رؤى عمليات نقاط البيع\" لأصحاب المصلحة في SNB سرداً واضحاً ومبنياً على البيانات لسلوكيات إنفاق المستهلكين. أثبت المشروع قدرتي على أخذ البيانات المصرفية الخام والمجزأة وهندستها لتصبح لوحة تحكم موثوقة وجاهزة للأعمال.",
+                outcomes_p2: "بعيداً عن التطوير التقني، سد هذا التدريب الفجوة بين النظرية الأكاديمية والتطبيق في الشركات. وقد أبرز الأهمية البالغة لحوكمة البيانات الصارمة، واختبارات ETL القوية، وفن سرد القصص بالبيانات — مما يثبت أن هندسة البيانات الناجحة تتمحور حول ترجمة المخططات المعقدة إلى قصص أعمال مقنعة وقابلة للتنفيذ.",
+                footer_text: "غدي سعيد. وثيقة دراسة حالة."
+            }
+        };
+
+        let currentLang = 'en';
+
+        // Helper function to recursively find and replace text nodes inside elements containing HTML
+        function replaceTextKeepingHTML(element, newHtml) {
+             element.innerHTML = newHtml;
+        }
+
+        document.getElementById('langSwitch').addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            
+            // Switch direction and lang attributes
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            
+            // Update the toggle button text
+            document.getElementById('langText').textContent = currentLang === 'en' ? 'عربي' : 'EN';
+            
+            // Update the back arrow direction specifically
+            const backIcon = document.getElementById('backIcon');
+            if (currentLang === 'ar') {
+                backIcon.classList.remove('fa-arrow-left');
+                backIcon.classList.add('fa-arrow-right');
+            } else {
+                backIcon.classList.remove('fa-arrow-right');
+                backIcon.classList.add('fa-arrow-left');
+            }
+            
+            // Apply translations using innerHTML to preserve inline tags
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    replaceTextKeepingHTML(el, translations[currentLang][key]);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

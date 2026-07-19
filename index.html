@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ghadi Saeed | Portfolio</title>
+    <meta name="description" content="Portfolio of Ghadi Saeed, Software & AI Engineer.">
+    
+    <!-- Google Fonts: Inter for English, Cairo for Arabic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           CSS VARIABLES & GLOBAL STYLES
+           ========================================================================== */
+        :root {
+            /* Custom Pastel/Elegant Color Palette */
+            --bg-base: #EEE8E5; 
+            --bg-glass: rgba(255, 255, 255, 0.6); 
+            --bg-glass-hover: rgba(255, 255, 255, 0.9);
+            --glass-border: rgba(90, 68, 82, 0.1); 
+            
+            --primary: #5A4452; 
+            --primary-light: rgba(90, 68, 82, 0.3);
+            --secondary: #A7AFC2; 
+            --accent: #E8BBB6; 
+            --tertiary: #C8D0CF; 
+            
+            --text-main: #5A4452; 
+            --text-muted: #7a6b74; 
+            
+            --font-en: 'Inter', sans-serif;
+            --font-ar: 'Cairo', sans-serif;
+            
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --radius-md: 16px;
+            --radius-lg: 24px;
+        }
+
+        html[lang="en"] { font-family: var(--font-en); }
+        html[lang="ar"] { font-family: var(--font-ar); }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* Abstract Background Glows */
+        .bg-glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+            opacity: 0.6; 
+            animation: floatGlow 10s infinite alternate;
+        }
+        .glow-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: rgba(232, 187, 182, 0.4); } 
+        .glow-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: rgba(167, 175, 194, 0.4); } 
+        .glow-3 { top: 40%; left: 40%; width: 30vw; height: 30vw; background: rgba(200, 208, 207, 0.4); } 
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 30px) scale(1.1); }
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 { color: var(--text-main); font-weight: 700; line-height: 1.2; }
+        p { color: var(--text-muted); margin-bottom: 1rem; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            display: block; /* Centering fix */
+            color: var(--primary);
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            margin: 0 auto; /* Centering fix */
+            width: 50%;
+            max-width: 250px; /* Optional: Keep the line from getting too wide on large screens */
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            border-radius: 10px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #7c6273); 
+            color: #EEE8E5; 
+            box-shadow: 0 4px 15px rgba(90, 68, 82, 0.2);
+        }
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(90, 68, 82, 0.3);
+            transform: translateY(-2px);
+            color: #fff;
+        }
+        .btn-secondary {
+            background: var(--bg-glass);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: #EEE8E5;
+            transform: translateY(-2px);
+        }
+        .btn-outline {
+            background: var(--bg-glass);
+            border-color: var(--glass-border);
+            color: var(--primary);
+            backdrop-filter: blur(10px);
+        }
+        .btn-outline:hover {
+            background: var(--bg-glass-hover);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Glass Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            width: 100%;
+        }
+
+        /* ==========================================================================
+           COMPONENTS
+           ========================================================================== */
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-base);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 0.5s ease;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--glass-border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: rgba(238, 232, 229, 0.85); 
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 900;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+        nav.scrolled { padding: 1rem 2rem; box-shadow: 0 10px 30px rgba(90, 68, 82, 0.05); }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); letter-spacing: 1px; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { font-size: 0.95rem; font-weight: 600; position: relative; color: var(--primary); }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: -5px;
+            left: 50%; background: var(--primary); transition: var(--transition); transform: translateX(-50%);
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+        /* Lang Switcher */
+        .lang-switch {
+            background: var(--bg-glass);
+            border: 1px solid var(--glass-border);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+        .lang-switch:hover { background: var(--bg-glass-hover); border-color: var(--primary); }
+
+        /* Scroll Animation Classes */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-left { opacity: 0; transform: translateX(-30px); transition: all 0.8s ease-out; }
+        .reveal-left.active { opacity: 1; transform: translateX(0); }
+        .reveal-right { opacity: 0; transform: translateX(30px); transition: all 0.8s ease-out; }
+        .reveal-right.active { opacity: 1; transform: translateX(0); }
+
+        [dir="rtl"] .reveal-left { transform: translateX(30px); }
+        [dir="rtl"] .reveal-right { transform: translateX(-30px); }
+        
+        [dir="rtl"] .reveal-left.active,
+        [dir="rtl"] .reveal-right.active { transform: translateX(0); }
+
+        /* ==========================================================================
+           SECTIONS
+           ========================================================================== */
+
+        /* 1. Hero Section */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 100px;
+            padding-bottom: 50px;
+        }
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            width: 100%;
+        }
+        .hero-text { flex: 1; color: var(--text-main); }
+        .hero-text h1 { font-size: 3.5rem; margin-bottom: 1rem; }
+        .hero-text h2 { font-size: 1.8rem; font-weight: 400; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .hero-text p { font-size: 1.1rem; max-width: 600px; margin-bottom: 2rem; }
+        
+        .hero-info-list {
+            margin-top: -1rem; 
+            margin-bottom: 2.5rem; 
+            font-weight: 500; 
+            color: var(--primary); 
+            font-size: 1.05rem; 
+            line-height: 1.8;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .hero-info-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .hero-info-list li i {
+            width: 24px;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .hero-btns { 
+            display: flex; 
+            gap: 1rem; 
+            flex-wrap: wrap; /* Allows buttons to stack naturally on smaller screens */
+            align-items: center;
+        }
+        
+        .hero-img-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+        .glow-ring {
+            position: relative;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--secondary)); 
+            padding: 5px;
+            box-shadow: 0 0 40px rgba(232, 187, 182, 0.4);
+            animation: pulseGlow 3s infinite alternate;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 30px rgba(232, 187, 182, 0.3); }
+            100% { box-shadow: 0 0 60px rgba(167, 175, 194, 0.5); }
+        }
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: #EEE8E5;
+            border: 5px solid var(--bg-base);
+            object-fit: contain;
+            padding: 20px;
+        }
+
+        /* 2. About Section */
+        #about .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem; /* Increased slightly to balance layout */
+            align-items: stretch; /* Stretches items to balance height */
+            background: var(--bg-glass);
+            border: 1px solid var(--glass-border);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(90, 68, 82, 0.05);
+        }
+        
+        .about-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .about-text p {
+            font-size: 1.05rem; /* Increased for better hierarchy */
+            line-height: 1.8;
+            margin-bottom: 1.5rem; /* Better spacing between paragraphs */
+        }
+
+        /* 2.1 Interactive Workflow Component */
+        .workflow-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .workflow-parallax {
+            position: relative;
+            animation: floatWorkflow 8s ease-in-out infinite;
+            z-index: 1;
+            padding: 1rem;
+            width: 100%;
+            max-width: 400px; /* Constrains width to make it less dominant */
+            transition: transform 0.1s ease-out; /* Parallax movement isolated here */
+            transform-style: preserve-3d;
+        }
+        
+        @keyframes floatWorkflow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .workflow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem; /* Reduced gap */
+            position: relative;
+        }
+
+        .workflow-container::before {
+            content: '';
+            position: absolute;
+            left: 35px; /* Adjusted for smaller icon */
+            top: 25px;
+            bottom: 25px;
+            width: 1px; /* Thinner line */
+            background: linear-gradient(to bottom, var(--primary-light), var(--accent), var(--secondary));
+            z-index: -1;
+            opacity: 0.5;
+        }
+        [dir="rtl"] .workflow-container::before {
+            left: auto;
+            right: 35px;
+        }
+
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--glass-border);
+            padding: 1rem; /* Reduced padding */
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth elegant ease */
+            cursor: default;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(90, 68, 82, 0.02);
+            /* Transform is kept strictly for hover, no parallax conflicts here */
+        }
+
+        .workflow-step:hover {
+            transform: translateX(10px); /* Calmer shift */
+            border-color: var(--primary);
+            box-shadow: 0 8px 25px rgba(90, 68, 82, 0.08); /* Softer shadow */
+            background: var(--bg-glass-hover);
+            z-index: 2;
+        }
+        [dir="rtl"] .workflow-step:hover {
+            transform: translateX(-10px);
+        }
+
+        .step-icon {
+            width: 35px; /* Smaller icon */
+            height: 35px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #7c6273);
+            color: #EEE8E5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(90, 68, 82, 0.15);
+            transition: var(--transition);
+        }
+
+        .workflow-step:hover .step-icon {
+            transform: scale(1.05); /* Calmer scale */
+            box-shadow: 0 6px 15px rgba(90, 68, 82, 0.25);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+        }
+
+        .step-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .step-content h4 {
+            color: var(--primary);
+            font-size: 1rem; /* Slightly smaller */
+            margin-bottom: 0.1rem;
+            font-weight: 700;
+        }
+
+        .step-content p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin: 0;
+            line-height: 1.3;
+        }
+        
+        /* 3. Skills Section (Reference Image Style) */
+        .skills-category-desc {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-size: 1.05rem;
+        }
+        .skills-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .skill-category-row {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--glass-border);
+            padding: 2rem 2.5rem;
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(90, 68, 82, 0.02);
+            transition: var(--transition);
+        }
+        .skill-category-row:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(90, 68, 82, 0.08);
+            border-color: rgba(90, 68, 82, 0.2);
+        }
+        .category-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.2rem;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        .category-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            width: 100%;
+        }
+        .category-content h3 {
+            font-size: 1.25rem;
+            margin: 0;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+            box-shadow: 0 2px 10px rgba(90, 68, 82, 0.02);
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .skill-tag:hover {
+            background: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(90, 68, 82, 0.08);
+            border-color: var(--glass-border);
+        }
+        .skill-tag i {
+            font-size: 1.1rem;
+        }
+
+        /* 4. Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(90, 68, 82, 0.03);
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+            box-shadow: 0 10px 20px rgba(90, 68, 82, 0.1);
+        }
+        .project-img {
+            width: 100%;
+            height: 200px;
+            background: var(--tertiary);
+            object-fit: cover;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .project-content { 
+            padding: 1.5rem; 
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-title { font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--primary); }
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            margin-top: auto; /* Pushes tags to the bottom */
+        }
+        .tag {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            background: rgba(90, 68, 82, 0.05);
+            border: 1px solid rgba(90, 68, 82, 0.1);
+            border-radius: 20px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        /* Featured Project Badge */
+        .tag.featured-tag {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #EEE8E5;
+            margin-bottom: 1rem;
+            display: inline-block;
+            border: none;
+            font-weight: 700;
+            box-shadow: 0 2px 10px rgba(90, 68, 82, 0.15);
+        }
+
+        /* 5. Experience & Education Timeline */
+        .timeline-flex {
+            display: table;
+            width: 100%;
+            margin-top: 2rem;
+            border-spacing: 0 20px;
+        }
+        .timeline-row {
+            display: table-row;
+        }
+        .timeline-time, .timeline-content-cell {
+            display: table-cell;
+            vertical-align: top;
+            padding: 15px;
+        }
+        .timeline-time {
+            width: 25%;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+            border-right: 3px solid var(--primary-light);
+            text-align: right;
+            padding-right: 25px;
+        }
+        [dir="rtl"] .timeline-time {
+            border-right: none;
+            border-left: 3px solid var(--primary-light);
+            text-align: left;
+            padding-left: 25px;
+            padding-right: 15px;
+        }
+        .timeline-content-cell {
+            padding-left: 25px;
+        }
+        [dir="rtl"] .timeline-content-cell {
+            padding-right: 25px;
+            padding-left: 15px;
+        }
+        .timeline-box {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid var(--glass-border);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s ease;
+        }
+        .timeline-box:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.6);
+        }
+        .timeline-box h3 {
+            margin-top: 0;
+            color: var(--text-main);
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        .timeline-box h4 {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+        .timeline-box ul {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--text-muted);
+        }
+        [dir="rtl"] .timeline-box ul {
+            padding-left: 0;
+            padding-right: 20px;
+        }
+        .timeline-box ul li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        .timeline-box p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* 6. Contact Section */
+        .contact-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: var(--bg-glass);
+            border: 1px solid var(--glass-border);
+            padding: 4rem 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 30px rgba(90, 68, 82, 0.05);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* ==========================================================================
+           CERTIFICATE MODAL (LIGHTBOX) STYLES
+           ========================================================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            height: 85vh;
+            background: var(--bg-base);
+            padding: 10px;
+            border-radius: var(--radius-md);
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            border: 2px solid var(--bg-base);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .modal-body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-body iframe, .modal-body object {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .modal-body img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-content { flex-direction: column-reverse; text-align: center; gap: 3rem; }
+            .hero-btns { justify-content: center; }
+            .hero-info-list li { justify-content: center; }
+            .glow-ring { width: 300px; height: 300px; }
+            
+            /* Responsive About Grid: Text first, Workflow second */
+            #about .about-grid { display: flex; flex-direction: column; gap: 3rem; }
+            
+            .timeline-time, .timeline-content-cell { display: block; width: 100%; border: none !important; text-align: left !important; padding: 10px 0 !important; }
+            [dir="rtl"] .timeline-time { text-align: right !important; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            h1.section-title { font-size: 2rem; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .glow-ring { width: 240px; height: 240px; }
+            .container { padding: 4rem 1rem; }
+            
+            /* Add some extra spacing for the stacked buttons on mobile */
+            .hero-btns { justify-content: center; gap: 0.8rem; }
+            .hero-btns .btn { padding: 0.75rem 1.2rem; font-size: 0.9rem; }
+
+            /* Align Briefcase and Location Icons correctly on mobile with text */
+            .hero-info-list li {
+                align-items: center; /* keep vertical center alignment */
+                text-align: left;
+            }
+            
+            [dir="rtl"] .hero-info-list li {
+                text-align: right;
+            }
+
+            .hero-info-list li i {
+                margin-top: 0; /* Reset previous margin-top */
+            }
+
+            /* Skills Section Mobile */
+            .skill-category-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.2rem;
+                padding: 1.5rem;
+            }
+            .category-icon-wrapper {
+                width: 60px;
+                height: 60px;
+                font-size: 1.6rem;
+            }
+            .skill-tags {
+                gap: 0.6rem;
+            }
+            .skill-tag {
+                font-size: 0.85rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Effects -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner"></div>
+        <p style="margin-top: 20px; letter-spacing: 2px; color: var(--primary); font-weight: 600;" data-i18n="loading">Loading Experience...</p>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Navbar -->
+    <nav id="navbar">
+        <div class="logo">Ghadi.</div>
+        <ul class="nav-links">
+            <li><a href="#hero" class="active" data-i18n="nav_home">Home</a></li>
+            <li><a href="#about" data-i18n="nav_about">About</a></li>
+            <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+            <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+            <li><a href="#experience" data-i18n="nav_experience">Experience & Education</a></li>
+            <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+        </ul>
+        <button class="lang-switch" id="langSwitch" aria-label="Toggle Language">
+            <i class="fa-solid fa-globe"></i> <span id="langText">عربي</span>
+        </button>
+    </nav>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="hero" class="container">
+            <div class="hero-content">
+                <div class="hero-text reveal-left">
+                    <h2 data-i18n="hero_hello">Hello, I'm</h2>
+                    <h1 class="text-gradient" data-i18n="hero_name">Ghadi Saeed</h1>
+                    <h2 style="color: var(--primary); font-size: 1.5rem;" data-i18n="hero_title">Software Engineer | AI Developer</h2>
+                    <p data-i18n="hero_desc">Computer Science graduate with hands-on experience building AI-powered applications, full software solutions, and data-driven projects. Passionate about transforming ideas into impactful digital products through software engineering, artificial intelligence, and modern web technologies.</p>
+                    
+                    <ul class="hero-info-list">
+                        <li><i class="fa-solid fa-location-dot"></i> <span data-i18n="hero_location">Jeddah, Saudi Arabia</span></li>
+                        <li><i class="fa-solid fa-briefcase"></i> <span data-i18n="hero_available">Available for Software Engineering & AI Roles</span></li>
+                    </ul>
+
+                    <div class="hero-btns">
+                        <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-rocket"></i> <span data-i18n="btn_work">View My Work</span></a>
+                        <a href="assets/pdf/Ghadi_Saeed_Software_Developer_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline"><i class="fa-solid fa-download"></i> <span data-i18n="btn_cv">Download CV</span></a>
+                        <a href="#contact" class="btn btn-outline"><i class="fa-regular fa-envelope"></i> <span data-i18n="btn_contact">Contact Me</span></a>
+                    </div>
+                </div>
+                <div class="hero-img-container reveal-right">
+                    <div class="glow-ring">
+                        <!-- Logo Image -->
+                        <img src="assets/images/image_5108a9.png" alt="Ghadi Saeed Logo" class="profile-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="container">
+            <h2 class="section-title reveal" data-i18n="sec_about">About Me</h2>
+            <div class="about-grid reveal">
+                <div class="about-text">
+                    <p data-i18n="about_p1">I am a Software Engineer and AI Developer with a strong interest in building intelligent, user-centered software that solves real-world problems. My experience spans AI-powered applications, modern web development, and data-driven systems, combining technical implementation with thoughtful user experience.</p>
+                    <p data-i18n="about_p2">Throughout my academic projects and professional training, I have worked on full software lifecycles—from designing interfaces and developing backend functionality to integrating machine learning models and deploying complete applications. I enjoy transforming ideas into impactful digital products through clean engineering practices, continuous learning, and collaborative problem-solving.</p>
+                </div>
+                
+                <!-- Interactive Engineering Workflow -->
+                <div class="workflow-wrapper reveal-right">
+                    <div class="workflow-parallax" id="workflowContainer">
+                        <div class="workflow-container">
+                            
+                            <div class="workflow-step">
+                                <div class="step-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                                <div class="step-content">
+                                    <h4 data-i18n="wf_idea_title">Idea</h4>
+                                    <p data-i18n="wf_idea_desc">Understanding the problem</p>
+                                </div>
+                            </div>
+                            
+                            <div class="workflow-step">
+                                <div class="step-icon"><i class="fa-solid fa-pen-ruler"></i></div>
+                                <div class="step-content">
+                                    <h4 data-i18n="wf_design_title">Design</h4>
+                                    <p data-i18n="wf_design_desc">Planning the user experience</p>
+                                </div>
+                            </div>
+                            
+                            <div class="workflow-step">
+                                <div class="step-icon"><i class="fa-solid fa-code"></i></div>
+                                <div class="step-content">
+                                    <h4 data-i18n="wf_build_title">Build</h4>
+                                    <p data-i18n="wf_build_desc">Developing scalable software</p>
+                                </div>
+                            </div>
+                            
+                            <div class="workflow-step">
+                                <div class="step-icon"><i class="fa-solid fa-brain"></i></div>
+                                <div class="step-content">
+                                    <h4 data-i18n="wf_ai_title">AI</h4>
+                                    <p data-i18n="wf_ai_desc">Integrating intelligent features</p>
+                                </div>
+                            </div>
+                            
+                            <div class="workflow-step">
+                                <div class="step-icon"><i class="fa-solid fa-rocket"></i></div>
+                                <div class="step-content">
+                                    <h4 data-i18n="wf_deploy_title">Deploy</h4>
+                                    <p data-i18n="wf_deploy_desc">Delivering production-ready solutions</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section id="skills" class="container">
+            <h2 class="section-title reveal" data-i18n="sec_skills">Core Technical Skills</h2>
+            <p class="skills-category-desc reveal" data-i18n="skills_intro">Technologies I use to build AI-powered software, modern web applications, and data-driven solutions.</p>
+            
+            <div class="skills-list">
+                <!-- AI & Machine Learning -->
+                <div class="skill-category-row reveal">
+                    <div class="category-icon-wrapper" style="background: rgba(232, 187, 182, 0.4);">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3 data-i18n="cat_ai_ml">AI & Machine Learning</h3>
+                        <div class="skill-tags">
+                            <div class="skill-tag"><i class="fa-brands fa-python" style="color: #3776AB;"></i> <span>Python</span></div>
+                            <div class="skill-tag"><i class="fa-solid fa-language" style="color: #9C27B0;"></i> <span>NLP</span></div>
+                            <div class="skill-tag"><i class="fa-solid fa-network-wired" style="color: #E91E63;"></i> <span>MARBERTv2 & Transformers</span></div>
+                            <div class="skill-tag"><i class="fa-solid fa-microchip" style="color: #00A67E;"></i> <span>OpenAI API</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Software Development -->
+                <div class="skill-category-row reveal" style="transition-delay: 0.1s;">
+                    <div class="category-icon-wrapper" style="background: rgba(167, 175, 194, 0.3);">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3 data-i18n="cat_sw_dev">Software Development</h3>
+                        <div class="skill-tags">
+                            <div class="skill-tag"><i class="fa-brands fa-java" style="color: #F44336;"></i> <span>Java</span></div>
+                            <div class="skill-tag"><i class="fa-solid fa-c" style="color: #1565C0;"></i> <span>C / C++</span></div>
+                            <div class="skill-tag"><i class="fa-brands fa-html5" style="color: #E65100;"></i> <span>HTML5</span></div>
+                            <div class="skill-tag"><i class="fa-brands fa-css3-alt" style="color: #1976D2;"></i> <span>CSS3</span></div>
+                            <div class="skill-tag"><i class="fa-brands fa-js" style="color: #FBC02D;"></i> <span>JavaScript</span></div>
+                            <div class="skill-tag"><i class="fa-solid fa-pepper-hot" style="color: #212121;"></i> <span>Flask</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Engineering & Analytics -->
+                <div class="skill-category-row reveal" style="transition-delay: 0.2s;">
+                    <div class="category-icon-wrapper" style="background: rgba(90, 68, 82, 0.1);">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3 data-i18n="cat_data_eng">Data Engineering & Analytics</h3>
+                        <div class="skill-tags">
+                            <div class="skill-tag"><i class="fa-solid fa-database" style="color: #3949AB;"></i> <span>SQL</span></div>
+                            <div class="skill-tag"><i class="fa-brands fa-google" style="color: #1E88E5;"></i> <span>BigQuery</span></div>
+                            <div class="skill-tag"><i class="fa-solid fa-chart-bar" style="color: #FBC02D;"></i> <span>Power BI</span></div>
+                            <div class="skill-tag"><i class="fa-solid fa-calculator" style="color: #8E24AA;"></i> <span>DAX</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Development & Design Tools -->
+                <div class="skill-category-row reveal" style="transition-delay: 0.3s;">
+                    <div class="category-icon-wrapper" style="background: rgba(200, 208, 207, 0.5);">
+                        <i class="fa-solid fa-cloud"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3 data-i18n="cat_cloud_tools">Development & Design Tools</h3>
+                        <div class="skill-tags">
+                            <div class="skill-tag"><i class="fa-brands fa-git-alt" style="color: #D84315;"></i> <span>Git & GitHub</span></div>
+                            <div class="skill-tag"><i class="fa-solid fa-fire" style="color: #FFCA28;"></i> <span>Firebase</span></div>
+                            <div class="skill-tag"><i class="fa-brands fa-figma" style="color: #EC407A;"></i> <span>Figma</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects" class="container">
+            <h2 class="section-title reveal" data-i18n="sec_projects">My Projects</h2>
+            <div class="projects-grid">
+                
+                <!-- FEATURED PROJECT: ANAH -->
+                <div class="project-card reveal">
+                    <img src="assets/images/AnnahLogo.png" alt="Anah Project" class="project-img">
+                    <div class="project-content">
+                        <span class="tag featured-tag" data-i18n="tag_featured">Featured Graduation Project</span>
+                        <h3 class="project-title" data-i18n="proj_anah_title">ANAH – Arabic AI-Powered Mental Health Platform</h3>
+                        <p data-i18n="proj_anah_desc">ANAH is an Arabic-first AI-powered mental health platform designed to support emotional well-being through intelligent journaling, Arabic emotion analysis, personalized recommendations, mood tracking, and an AI conversational assistant.</p>
+                        
+                        <div class="project-tags">
+                            <span class="tag">Arabic NLP</span>
+                            <span class="tag">MARBERTv2</span>
+                            <span class="tag">Python & Flask</span>
+                            <span class="tag">OpenAI API</span>
+                            <span class="tag">Firebase</span>
+                            <span class="tag">HTML/CSS/JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/galaadnan/anahWeb" target="_blank" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.9rem;"><i class="fa-brands fa-github"></i> GitHub</a>
+                            <a href="AnahCaseStudy.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;"><i class="fa-solid fa-file-alt"></i> <span data-i18n="btn_case_study">Case Study</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT 2: InsightMind AI -->
+                <div class="project-card reveal" style="transition-delay: 0.1s;">
+                    <img src="assets/images/InsightMindAI.png" alt="InsightMind AI" class="project-img">
+                    <div class="project-content">
+                        <h3 class="project-title" data-i18n="proj2_title">InsightMind AI</h3>
+                        <p data-i18n="proj2_desc">An AI-powered research assistant that helps users analyze mental health research papers, generate summaries, create presentations, and explore academic literature using Large Language Models (LLMs).</p>
+                        <div class="project-tags">
+                            <span class="tag">Vanilla JS</span><span class="tag">Gemini 2.5 Flash</span><span class="tag">PDF.js</span><span class="tag">HTML/CSS</span>
+                        </div>
+                        <div class="project-links" style="flex-wrap: wrap;">
+                            <a href="https://github.com/ghadiSaeed/InsightMind-AI" target="_blank" class="btn btn-outline" style="padding: 0.5rem 0.8rem; font-size: 0.85rem;"><i class="fa-brands fa-github"></i> GitHub</a>
+                            <a href="https://insight-mind-ai.vercel.app/" target="_blank" class="btn btn-primary" style="padding: 0.5rem 0.8rem; font-size: 0.85rem;"><i class="fa-solid fa-external-link-alt"></i> <span data-i18n="btn_live_demo">Live Demo</span></a>
+                            <a href="InsightMindCaseStudy.html" class="btn btn-outline" style="padding: 0.5rem 0.8rem; font-size: 0.85rem;"><i class="fa-solid fa-file-alt"></i> <span data-i18n="btn_case_study">Case Study</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT 3: POS Transactions Insights (SNB) -->
+                <div class="project-card reveal" style="transition-delay: 0.2s;">
+                    <img src="assets/images/PHOTO-2025-07-31-14-43-35.jpg" alt="POS Transactions Insights Dashboard" class="project-img" style="object-position: top;">
+                    <div class="project-content">
+                        <h3 class="project-title" data-i18n="proj3_title">POS Transactions Insights – SNB</h3>
+                        <p data-i18n="proj3_desc">An interactive Power BI dashboard developed during my Data Engineering internship at Saudi National Bank, analyzing over 450,000 POS transactions to uncover meaningful business insights.</p>
+                        <div class="project-tags">
+                            <span class="tag">Google BigQuery</span><span class="tag">SQL</span><span class="tag">Power BI</span><span class="tag">Excel</span>
+                        </div>
+                        <div class="project-links" style="flex-wrap: wrap;">
+                            <a href="pos-transactions-case-study.html" class="btn btn-primary" style="padding: 0.5rem 0.8rem; font-size: 0.85rem;"><i class="fa-solid fa-file-alt"></i> <span data-i18n="btn_case_study">Case Study</span></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- EXPERIENCE & EDUCATION SECTION -->
+        <section id="experience" class="container">
+            <h2 class="section-title reveal" data-i18n="sec_experience">Experience & Education</h2>
+            
+            <div class="timeline-flex reveal">
+                <!-- SNB Experience -->
+                <div class="timeline-row">
+                    <div class="timeline-time">2025</div>
+                    <div class="timeline-content-cell">
+                        <div class="timeline-box">
+                            <h3 data-i18n="exp1_title">Data Engineering Intern</h3>
+                            <h4 data-i18n="exp1_comp">Saudi National Bank (SNB)</h4>
+                            <ul id="exp1-bullets">
+                                <!-- Dynamic localized lists -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="timeline-row">
+                    <div class="timeline-time">2022 – 2026</div>
+                    <div class="timeline-content-cell">
+                        <div class="timeline-box">
+                            <h3 data-i18n="edu_title">Bachelor of Computer Science</h3>
+                            <h4 data-i18n="edu_inst">University of Jeddah</h4>
+                            <p data-i18n="edu_desc">Focused on software development, artificial intelligence, databases, web technologies, and data engineering. Participated in various academic and technical projects that strengthened problem-solving, teamwork, and analytical skills.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             CERTIFICATIONS SECTION
+             ========================================== -->
+        <section id="certifications" class="container">
+            <h2 class="section-title reveal" data-i18n="sec_certs">Certifications</h2>
+            
+            <div class="projects-grid">
+                
+                <!-- Cert 1: Google Build with AI -->
+                <div class="project-card reveal">
+                    <div class="project-content" style="display: flex; flex-direction: column; height: 100%;">
+                        <div>
+                            <h3 class="project-title" data-i18n="cert1_title" style="margin-bottom: 0.2rem;">Build with AI Agent Builder Workshop</h3>
+                            <h4 style="font-size: 0.95rem; color: var(--secondary); font-weight: 600; margin-bottom: 1rem;" data-i18n="cert1_org">Google for Developers × GeeksforGeeks</h4>
+                            <p data-i18n="cert1_desc" style="font-size: 0.95rem; line-height: 1.5;">Participated in the Build with AI Agent Builder Workshop by Google for Developers × GeeksforGeeks, gaining hands-on experience with Gemini, Prompt Engineering, AI Agents, and modern AI application development.</p>
+                            
+                            <div class="project-tags" style="margin-top: 1rem;">
+                                <span class="tag">Gemini</span>
+                                <span class="tag">AI Agents</span>
+                                <span class="tag">Prompt Engineering</span>
+                                <span class="tag">Google AI</span>
+                            </div>
+                        </div>
+                        <div class="project-links" style="margin-top: auto; justify-content: flex-start; padding-top: 1.5rem;">
+                            <button class="btn btn-primary cert-btn" data-cert="assets/images/Screenshot 1448-01-17 at 2.54.55 PM.png" style="padding: 0.5rem 1rem; font-size: 0.85rem; border: none; font-family: inherit;">
+                                <i class="fa-solid fa-certificate"></i> <span data-i18n="btn_view_cert">View Certificate</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cert 2: GDG Data Analysis -->
+                <div class="project-card reveal" style="transition-delay: 0.1s;">
+                    <div class="project-content" style="display: flex; flex-direction: column; height: 100%;">
+                        <div>
+                            <h3 class="project-title" data-i18n="cert4_title" style="margin-bottom: 0.2rem;">Data Analysis Bootcamp</h3>
+                            <h4 style="font-size: 0.95rem; color: var(--secondary); font-weight: 600; margin-bottom: 1rem;" data-i18n="cert4_org">GDG × PASDS × Azzam</h4>
+                            <p data-i18n="cert4_desc" style="font-size: 0.95rem; line-height: 1.5;">Participated in an intensive Data Analysis Bootcamp covering practical data analysis concepts and applications.</p>
+                            
+                            <div class="project-tags" style="margin-top: 1rem;">
+                                <span class="tag">Data Analysis</span>
+                                <span class="tag">Google Developer Groups</span>
+                                <span class="tag">Analytics</span>
+                            </div>
+                        </div>
+                        <div class="project-links" style="margin-top: auto; justify-content: flex-start; padding-top: 1.5rem;">
+                            <button class="btn btn-primary cert-btn" data-cert="assets/pdf/Ghadi Saeed-معسكر تحليل بيانات.pdf" style="padding: 0.5rem 1rem; font-size: 0.85rem; border: none; font-family: inherit;">
+                                <i class="fa-solid fa-certificate"></i> <span data-i18n="btn_view_cert">View Certificate</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cert 3: IBM AI Intro -->
+                <div class="project-card reveal" style="transition-delay: 0.2s;">
+                    <div class="project-content" style="display: flex; flex-direction: column; height: 100%;">
+                        <div>
+                            <h3 class="project-title" data-i18n="cert2_title" style="margin-bottom: 0.2rem;">Introduction to Artificial Intelligence (AI)</h3>
+                            <h4 style="font-size: 0.95rem; color: var(--secondary); font-weight: 600; margin-bottom: 1rem;" data-i18n="cert2_org">IBM / Coursera</h4>
+                            <p data-i18n="cert2_desc" style="font-size: 0.95rem; line-height: 1.5;">Completed IBM's Introduction to Artificial Intelligence (AI) course with Honors, covering AI fundamentals, machine learning concepts, and real-world AI applications.</p>
+                            
+                            <div class="project-tags" style="margin-top: 1rem;">
+                                <span class="tag">Artificial Intelligence</span>
+                                <span class="tag">IBM</span>
+                                <span class="tag">Machine Learning</span>
+                                <span class="tag">Coursera</span>
+                            </div>
+                        </div>
+                        <div class="project-links" style="margin-top: auto; justify-content: flex-start; padding-top: 1.5rem;">
+                            <button class="btn btn-primary cert-btn" data-cert="assets/pdf/CourseraAIWithHonors copy.pdf" style="padding: 0.5rem 1rem; font-size: 0.85rem; border: none; font-family: inherit;">
+                                <i class="fa-solid fa-certificate"></i> <span data-i18n="btn_view_cert">View Certificate</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cert 4: IBM Chatbots -->
+                <div class="project-card reveal">
+                    <div class="project-content" style="display: flex; flex-direction: column; height: 100%;">
+                        <div>
+                            <h3 class="project-title" data-i18n="cert3_title" style="margin-bottom: 0.2rem;">Building AI Powered Chatbots Without Programming</h3>
+                            <h4 style="font-size: 0.95rem; color: var(--secondary); font-weight: 600; margin-bottom: 1rem;" data-i18n="cert3_org">IBM / Coursera</h4>
+                            <p data-i18n="cert3_desc" style="font-size: 0.95rem; line-height: 1.5;">Learned to design and build AI-powered chatbots using IBM tools without writing code.</p>
+                            
+                            <div class="project-tags" style="margin-top: 1rem;">
+                                <span class="tag">Chatbots</span>
+                                <span class="tag">IBM Watson</span>
+                                <span class="tag">Generative AI</span>
+                                <span class="tag">Coursera</span>
+                            </div>
+                        </div>
+                        <div class="project-links" style="margin-top: auto; justify-content: flex-start; padding-top: 1.5rem;">
+                            <button class="btn btn-primary cert-btn" data-cert="assets/pdf/CourseraChatbot copy.pdf" style="padding: 0.5rem 1rem; font-size: 0.85rem; border: none; font-family: inherit;">
+                                <i class="fa-solid fa-certificate"></i> <span data-i18n="btn_view_cert">View Certificate</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cert 5: UCI Time Management -->
+                <div class="project-card reveal" style="transition-delay: 0.1s;">
+                    <div class="project-content" style="display: flex; flex-direction: column; height: 100%;">
+                        <div>
+                            <h3 class="project-title" data-i18n="cert5_title" style="margin-bottom: 0.2rem;">Work Smarter, Not Harder: Time Management</h3>
+                            <h4 style="font-size: 0.95rem; color: var(--secondary); font-weight: 600; margin-bottom: 1rem;" data-i18n="cert5_org">University of California, Irvine / Coursera</h4>
+                            <p data-i18n="cert5_desc" style="font-size: 0.95rem; line-height: 1.5;">Completed training on personal and professional productivity, time management, and effective work organization.</p>
+                            
+                            <div class="project-tags" style="margin-top: 1rem;">
+                                <span class="tag">Productivity</span>
+                                <span class="tag">Time Management</span>
+                                <span class="tag">Professional Skills</span>
+                                <span class="tag">Coursera</span>
+                            </div>
+                        </div>
+                        <div class="project-links" style="margin-top: auto; justify-content: flex-start; padding-top: 1.5rem;">
+                            <button class="btn btn-primary cert-btn" data-cert="assets/pdf/Courseraاعملبذكاء copy.pdf" style="padding: 0.5rem 1rem; font-size: 0.85rem; border: none; font-family: inherit;">
+                                <i class="fa-solid fa-certificate"></i> <span data-i18n="btn_view_cert">View Certificate</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="container">
+            <h2 class="section-title reveal" data-i18n="sec_contact">Contact Me</h2>
+            <div class="contact-card reveal">
+                <h3 data-i18n="contact_heading" style="font-size: 2rem; color: var(--primary);">Let's Build the Future Together!</h3>
+                <p data-i18n="contact_desc" style="max-width: 600px; margin-top: 10px;">I'm currently open to new opportunities, collaborations, and exciting projects. Whether you have a question or would like to discuss a potential opportunity, feel free to reach out.</p>
+                <div class="contact-links" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 30px;">
+                    <a href="mailto:ghadi6249@gmail.com" class="btn btn-primary"><i class="fa-regular fa-envelope"></i> Email</a>
+                    <a href="https://www.linkedin.com/in/ghadiseed" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://github.com/ghadiSaeed" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-github"></i> GitHub</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> <span data-i18n="footer_text">Ghadi Saeed. All rights reserved. Built with passion & vanilla code.</span></p>
+    </footer>
+
+    <!-- Certificate Lightbox Modal -->
+    <div id="certModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+            <div class="modal-body" id="modalBody">
+                <!-- Image or iframe will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         JAVASCRIPT LOGIC
+         ========================================================================== -->
+    <script>
+        // ==========================================
+        // 1. UI Interactions (Preloader & Scroll)
+        // ==========================================
+        
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+            
+            document.getElementById('year').textContent = new Date().getFullYear();
+        });
+
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const totalHeight = document.body.scrollHeight - window.innerHeight;
+            const progress = (window.scrollY / totalHeight) * 100;
+            scrollProgress.style.width = progress + '%';
+            
+            const nav = document.getElementById('navbar');
+            if(window.scrollY > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        // ==========================================
+        // 2. Scroll Animations (Intersection Observer)
+        // ==========================================
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ==========================================
+        // 3. Localization & Translation System
+        // ==========================================
+        const translations = {
+            en: {
+                loading: "Loading Experience...",
+                nav_home: "Home", nav_about: "About", nav_skills: "Skills",
+                nav_projects: "Projects", nav_experience: "Experience & Education", nav_contact: "Contact",
+                hero_hello: "Hello, I'm", hero_name: "Ghadi Saeed", hero_title: "Software Engineer | AI Developer",
+                hero_desc: "Computer Science graduate with hands-on experience building AI-powered applications, full software solutions, and data-driven projects. Passionate about transforming ideas into impactful digital products through software engineering, artificial intelligence, and modern web technologies.",
+                hero_location: "Jeddah, Saudi Arabia",
+                hero_available: "Available for Software Engineering & AI Roles",
+                btn_work: "View My Work", btn_contact: "Contact Me",
+                sec_about: "About Me",
+                about_p1: "I am a Software Engineer and AI Developer with a strong interest in building intelligent, user-centered software that solves real-world problems. My experience spans AI-powered applications, modern web development, and data-driven systems, combining technical implementation with thoughtful user experience.",
+                about_p2: "Throughout my academic projects and professional training, I have worked on full software lifecycles—from designing interfaces and developing backend functionality to integrating machine learning models and deploying complete applications. I enjoy transforming ideas into impactful digital products through clean engineering practices, continuous learning, and collaborative problem-solving.",
+                
+                // Workflow Translations
+                wf_idea_title: "Idea",
+                wf_idea_desc: "Understanding the problem",
+                wf_design_title: "Design",
+                wf_design_desc: "Planning the user experience",
+                wf_build_title: "Build",
+                wf_build_desc: "Developing scalable software",
+                wf_ai_title: "AI",
+                wf_ai_desc: "Integrating intelligent features",
+                wf_deploy_title: "Deploy",
+                wf_deploy_desc: "Delivering production-ready solutions",
+                
+                sec_skills: "Core Technical Skills",
+                skills_intro: "Technologies I use to build AI-powered software, modern web applications, and data-driven solutions.",
+                cat_prog: "Programming Languages", // Keeping old ones just in case
+                cat_web: "Web Development", 
+                cat_ai: "AI & Machine Learning", 
+                cat_tools: "Tools, Cloud & Tech",
+
+                // Modern Skills Categories
+                cat_ai_ml: "AI & Machine Learning",
+                cat_sw_dev: "Software Development",
+                cat_data_eng: "Data Engineering & Analytics",
+                cat_cloud_tools: "Development & Design Tools",
+
+                // Skills Subtitles
+                sk_sub_python: "AI Development & Academic Projects",
+                sk_sub_nlp: "Arabic Natural Language Processing",
+                sk_sub_transformers: "Arabic Emotion Classification",
+                sk_sub_openai: "LLM Integration",
+                sk_sub_java: "Object-Oriented Programming",
+                sk_sub_cpp: "Algorithms & Problem Solving",
+                sk_sub_html: "Semantic Web Development",
+                sk_sub_css: "Responsive UI Design",
+                sk_sub_js: "Interactive Frontend Development",
+                sk_sub_flask: "Backend API Development",
+                sk_sub_sql: "Database Design & SQL Queries",
+                sk_sub_bigquery: "Cloud Data Warehouse",
+                sk_sub_powerbi: "Interactive Dashboards & Data Visualization",
+                sk_sub_dax: "Data Analysis Expressions",
+                sk_sub_firebase: "Authentication, Firestore & Storage",
+                sk_sub_git: "Version Control & Collaboration",
+                sk_sub_figma: "UI/UX Design",
+
+                // Skills Badges
+                badge_anah: "Used in ANAH",
+                badge_snb: "SNB Internship",
+                badge_academic: "Academic Projects",
+                badge_production: "Production Project",
+                badge_acad_ai: "Academic & AI Projects",
+                badge_web: "Web Projects",
+                badge_acad_snb: "Academic Projects & SNB Internship",
+                badge_prof_cert: "Professional Projects & Certifications",
+                badge_multiple: "Multiple Projects",
+                badge_ui_ux: "UI/UX Projects",
+                
+                sec_projects: "My Projects",
+                
+                // ANAH Project Translations
+                tag_featured: "Featured Graduation Project",
+                btn_case_study: "Case Study",
+                btn_live_demo: "Live Demo",
+                proj_anah_title: "ANAH – Arabic AI-Powered Mental Health Platform",
+                proj_anah_desc: "ANAH is an Arabic-first AI-powered mental health platform designed to support emotional well-being through intelligent journaling, Arabic emotion analysis, personalized recommendations, mood tracking, and an AI conversational assistant.",
+                
+                proj2_title: "InsightMind AI", 
+                proj2_desc: "An AI-powered research assistant that helps users analyze mental health research papers, generate summaries, create presentations, and explore academic literature using Large Language Models (LLMs).",
+                
+                proj3_title: "POS Transactions Insights – SNB", 
+                proj3_desc: "An interactive Power BI dashboard developed during my Data Engineering internship at Saudi National Bank, analyzing over 450,000 POS transactions to uncover meaningful business insights.",
+                sec_experience: "Experience & Education",
+                exp1_title: "Data Engineering Intern", exp1_comp: "Saudi National Bank (SNB)",
+                edu_title: "Bachelor of Computer Science", edu_inst: "University of Jeddah",
+                edu_desc: "Focused on software development, artificial intelligence, databases, web technologies, and data engineering. Participated in various academic and technical projects that strengthened problem-solving, teamwork, and analytical skills.",
+                sec_contact: "Contact Me", contact_heading: "Let's Build the Future Together!",
+                contact_desc: "I'm currently open to new opportunities, collaborations, and exciting projects. Whether you have a question or would like to discuss a potential opportunity, feel free to reach out.",
+                btn_cv: "Download CV", footer_text: "Ghadi Saeed. All rights reserved. Built with passion & vanilla code.",
+
+                // Certifications
+                sec_certs: "Certifications",
+                btn_view_cert: "View Certificate",
+                cert1_title: "Build with AI Agent Builder Workshop",
+                cert1_org: "Google for Developers × GeeksforGeeks",
+                cert1_desc: "Participated in the Build with AI Agent Builder Workshop by Google for Developers × GeeksforGeeks, gaining hands-on experience with Gemini, Prompt Engineering, AI Agents, and modern AI application development.",
+                cert2_title: "Introduction to Artificial Intelligence (AI)",
+                cert2_org: "IBM / Coursera",
+                cert2_desc: "Completed IBM's Introduction to Artificial Intelligence (AI) course with Honors, covering AI fundamentals, machine learning concepts, and real-world AI applications.",
+                cert3_title: "Building AI Powered Chatbots Without Programming",
+                cert3_org: "IBM / Coursera",
+                cert3_desc: "Learned to design and build AI-powered chatbots using IBM tools without writing code.",
+                cert4_title: "Data Analysis Bootcamp",
+                cert4_org: "GDG × PASDS × Azzam",
+                cert4_desc: "Participated in an intensive Data Analysis Bootcamp covering practical data analysis concepts and applications.",
+                cert5_title: "Work Smarter, Not Harder: Time Management",
+                cert5_org: "University of California, Irvine / Coursera",
+                cert5_desc: "Completed training on personal and professional productivity, time management, and effective work organization."
+            },
+            ar: {
+                loading: "جاري تحميل التجربة...",
+                nav_home: "الرئيسية", nav_about: "من أنا", nav_skills: "المهارات",
+                nav_projects: "مشاريعي", nav_experience: "الخبرة والتعليم", nav_contact: "تواصل معي",
+                hero_hello: "مرحباً، أنا", hero_name: "غدي سعيد", hero_title: "مهندسة برمجيات | مطورة ذكاء اصطناعي",
+                hero_desc: "خريجة علوم حاسب، أمتلك خبرة عملية في تطوير تطبيقات مدعومة بالذكاء الاصطناعي، وبناء حلول برمجية متكاملة، وتنفيذ مشاريع تعتمد على البيانات. شغوفة بتحويل الأفكار إلى منتجات رقمية مؤثرة من خلال هندسة البرمجيات، والذكاء الاصطناعي، وتقنيات الويب الحديثة.",
+                hero_location: "جدة، المملكة العربية السعودية",
+                hero_available: "متاحة لفرص هندسة البرمجيات وتطوير الذكاء الاصطناعي",
+                btn_work: "شاهد أعمالي", btn_contact: "تواصل معي",
+                sec_about: "من أنا",
+                about_p1: " أنا مهندسة برمجيات ومطورة ذكاء اصطناعي، شغوفة ببناء حلول تقنية ذكية تركز على المستخدم وتعالج تحديات واقعية. تمتد خبرتي إلى تطوير تطبيقات مدعومة بالذكاء الاصطناعي، وتقنيات الويب الحديثة، والأنظمة المعتمدة على البيانات، مع الحرص على تقديم تجربة استخدام عملية وسلسة.",
+                about_p2: "من خلال مشاريعي الأكاديمية وتجربتي العملية، شاركت في تطوير حلول برمجية متكاملة بدءًا من تصميم واجهات المستخدم، مرورًا ببناء الأنظمة الخلفية، ووصولًا إلى دمج نماذج الذكاء الاصطناعي ونشر التطبيقات. أؤمن بأن أفضل البرمجيات هي التي تجمع بين الجودة التقنية، وسهولة الاستخدام، والأثر الحقيقي للمستخدم.",
+                
+                // Workflow Translations
+                wf_idea_title: "الفكرة",
+                wf_idea_desc: "فهم المشكلة وتحليل المتطلبات",
+                wf_design_title: "التصميم",
+                wf_design_desc: "تخطيط وتصميم تجربة المستخدم",
+                wf_build_title: "البناء",
+                wf_build_desc: "تطوير أنظمة برمجية متينة",
+                wf_ai_title: "الذكاء الاصطناعي",
+                wf_ai_desc: "دمج الخصائص والأنظمة الذكية",
+                wf_deploy_title: "النشر",
+                wf_deploy_desc: "إطلاق الحلول الرقمية وإدارتها",
+                
+                sec_skills: "المهارات التقنية الأساسية", 
+                skills_intro: "التقنيات التي أستخدمها لبناء تطبيقات مدعومة بالذكاء الاصطناعي، وحلول الويب الحديثة، والأنظمة المعتمدة على البيانات.",
+                cat_prog: "لغات البرمجة", // Keeping old ones just in case
+                cat_web: "تطوير الويب", 
+                cat_ai: "الذكاء الاصطناعي وتعلم الآلة", 
+                cat_tools: "أدوات وتقنيات سحابية",
+
+                // Modern Skills Categories
+                cat_ai_ml: "الذكاء الاصطناعي وتعلم الآلة",
+                cat_sw_dev: "تطوير البرمجيات",
+                cat_data_eng: "هندسة وتحليل البيانات",
+                cat_cloud_tools: "السحابة وأدوات التطوير",
+
+                // Skills Subtitles
+                sk_sub_python: "تطوير الذكاء الاصطناعي والمشاريع الأكاديمية",
+                sk_sub_nlp: "معالجة اللغات الطبيعية العربية",
+                sk_sub_transformers: "تصنيف المشاعر باللغة العربية",
+                sk_sub_openai: "تكامل النماذج اللغوية الكبيرة",
+                sk_sub_java: "البرمجة كائنية التوجه",
+                sk_sub_cpp: "الخوارزميات وحل المشكلات",
+                sk_sub_html: "تطوير الويب الدلالي",
+                sk_sub_css: "تصميم واجهات مستخدم متجاوبة",
+                sk_sub_js: "تطوير واجهات أمامية تفاعلية",
+                sk_sub_flask: "تطوير واجهات برمجة التطبيقات الخلفية",
+                sk_sub_sql: "تصميم قواعد البيانات والاستعلامات",
+                sk_sub_bigquery: "مستودع بيانات سحابي",
+                sk_sub_powerbi: "لوحات تحكم تفاعلية وتصوير البيانات",
+                sk_sub_dax: "تعبيرات تحليل البيانات",
+                sk_sub_firebase: "المصادقة و Firestore والتخزين",
+                sk_sub_git: "التحكم في الإصدارات والتعاون",
+                sk_sub_figma: "تصميم واجهات وتجربة المستخدم",
+
+                // Skills Badges
+                badge_anah: "استخدم في مشروع أناة",
+                badge_snb: "تدريب البنك الأهلي",
+                badge_academic: "مشاريع أكاديمية",
+                badge_production: "مشروع قيد التشغيل",
+                badge_acad_ai: "مشاريع أكاديمية وتطبيقات ذكاء اصطناعي",
+                badge_web: "مشاريع الويب",
+                badge_acad_snb: "مشاريع أكاديمية وتدريب البنك الأهلي",
+                badge_prof_cert: "مشاريع مهنية وشهادات",
+                badge_multiple: "مشاريع متعددة",
+                badge_ui_ux: "مشاريع تصميم الواجهات",
+
+                sec_projects: "مشاريعي",
+                
+                // ANAH Project Translations
+                tag_featured: "مشروع التخرج المميز",
+                btn_case_study: "دراسة الحالة",
+                btn_live_demo: "عرض مباشر",
+                proj_anah_title: "أناه – منصة عربية للصحة النفسية بالذكاء الاصطناعي",
+                proj_anah_desc: "منصة عربية للصحة النفسية مدعومة بالذكاء الاصطناعي، تهدف إلى دعم الصحة النفسية من خلال تدوين اليوميات الذكي، وتحليل المشاعر باللغة العربية، وتقديم توصيات مخصصة، وتتبع الحالة المزاجية، ومساعد محادثة مدعوم بالذكاء الاصطناعي.",
+                
+                proj2_title: "InsightMind AI", 
+                proj2_desc: "مساعد بحثي مدعوم بالذكاء الاصطناعي يساعد الباحثين على تحليل الأوراق العلمية، واستخلاص أهم الأفكار، وإنشاء العروض التقديمية، واستكشاف الأبحاث بكفاءة باستخدام النماذج اللغوية الكبيرة (LLMs).",
+                
+                proj3_title: "رؤى عمليات نقاط البيع - البنك الأهلي السعودي", 
+                proj3_desc: "لوحة معلومات تفاعلية باستخدام Power BI طُوّرت خلال فترة تدريبي في هندسة البيانات بالبنك الأهلي السعودي، لتحليل أكثر من 450,000 عملية نقاط بيع واستخلاص رؤى تدعم اتخاذ القرار.",
+                sec_experience: "الخبرة والتعليم",
+                exp1_title: "متدربة هندسة بيانات", exp1_comp: "البنك الأهلي السعودي",
+                edu_title: "بكالوريوس علوم الحاسب", edu_inst: "جامعة جدة",
+                edu_desc: "تخصصت في تطوير البرمجيات والذكاء الاصطناعي وقواعد البيانات وتقنيات الويب وهندسة البيانات، مع المشاركة في العديد من المشاريع التقنية التي عززت مهارات حل المشكلات والعمل الجماعي والتفكير التحليلي.",
+                sec_contact: "تواصل معي", contact_heading: "لنقم ببناء شيء رائع!",
+                contact_desc: "أرحب بفرص التعاون والمشاريع والفرص الوظيفية، ويسعدني استقبال استفساراتكم والتواصل معكم.",
+                btn_cv: "تحميل السيرة الذاتية", footer_text: "غدي سعيد. جميع الحقوق محفوظة. صُنع بشغف.",
+
+                // الشهادات
+                sec_certs: "الشهادات",
+                btn_view_cert: "عرض الشهادة",
+                cert1_title: "ورشة Build with AI Agent Builder",
+                cert1_org: "Google for Developers × GeeksforGeeks",
+                cert1_desc: "شاركت في ورشة Build with AI Agent Builder المقدمة من Google for Developers × GeeksforGeeks، واكتسبت خبرة عملية في استخدام Gemini، وهندسة الأوامر (Prompt Engineering)، ووكلاء الذكاء الاصطناعي، وتطوير تطبيقات الذكاء الاصطناعي الحديثة.",
+                cert2_title: "مقدمة في الذكاء الاصطناعي (AI)",
+                cert2_org: "IBM / Coursera",
+                cert2_desc: "إتمام دورة مقدمة في الذكاء الاصطناعي من IBM بمرتبة الشرف، تغطي أساسيات الذكاء الاصطناعي ومفاهيم تعلم الآلة وتطبيقاتها.",
+                cert3_title: "بناء روبوتات محادثة (Chatbots) بالذكاء الاصطناعي بدون برمجة",
+                cert3_org: "IBM / Coursera",
+                cert3_desc: "تعلم تصميم وبناء روبوتات محادثة مدعومة بالذكاء الاصطناعي باستخدام أدوات IBM دون الحاجة لكتابة أكواد برمجية.",
+                cert4_title: "معسكر تحليل البيانات",
+                cert4_org: "GDG × PASDS × عزام",
+                cert4_desc: "مشاركة في معسكر مكثف لتحليل البيانات يغطي المفاهيم العملية والتطبيقات الخاصة بتحليل البيانات.",
+                cert5_title: "اعمل بذكاء أكثر لا بجهد أكبر: إدارة الوقت",
+                cert5_org: "جامعة كاليفورنيا، إيرفاين / Coursera",
+                cert5_desc: "إتمام تدريب متخصص في الإنتاجية الشخصية والمهنية، وإدارة الوقت، والتنظيم الفعال للعمل."
+            }
+        };
+
+        const bulletsData = {
+            en: [
+                "Worked on data engineering and data warehousing tasks.",
+                "Performed SQL-based data analysis and transformation tasks.",
+                "Gained hands-on experience with ETL processes and business intelligence tools.",
+                "Developed dashboards and generated insights from large datasets.",
+                "Collaborated with teams to improve data quality and support business decision-making."
+            ],
+            ar: [
+                "العمل على مفاهيم هندسة البيانات ومستودعات البيانات.",
+                "تنفيذ عمليات تحليل وتحويل البيانات باستخدام SQL.",
+                "اكتساب خبرة عملية في عمليات ETL وأدوات ذكاء الأعمال.",
+                "تطوير لوحات معلومات واستخراج رؤى من مجموعات بيانات كبيرة.",
+                "التعاون مع الفرق المختلفة لتحسين جودة البيانات ودعم اتخاذ القرار."
+            ]
+        };
+
+        let currentLang = 'en'; // Default Language
+        
+        function updateBullets(lang) {
+            const listContainer = document.getElementById('exp1-bullets');
+            if(!listContainer) return;
+            listContainer.innerHTML = '';
+            bulletsData[lang].forEach(txt => {
+                const li = document.createElement('li');
+                li.textContent = txt;
+                listContainer.appendChild(li);
+            });
+        }
+
+        // Initialize bullets on load
+        window.addEventListener('DOMContentLoaded', () => {
+            updateBullets(currentLang);
+        });
+        
+        document.getElementById('langSwitch').addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.getElementById('langText').textContent = currentLang === 'en' ? 'عربي' : 'EN';
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(translations[currentLang][key]) {
+                    el.textContent = translations[currentLang][key];
+                }
+            });
+
+            // Update dynamically loaded bullets
+            updateBullets(currentLang);
+        });
+
+        // ==========================================
+        // 4. Certificate Modal Logic
+        // ==========================================
+        const modalOverlay = document.getElementById('certModal');
+        const modalClose = document.getElementById('modalClose');
+        const modalBody = document.getElementById('modalBody');
+        const certButtons = document.querySelectorAll('.cert-btn');
+
+        function openModal(fileName) {
+            modalBody.innerHTML = ''; // Clear previous content
+            
+            // Render as iframe for PDF or img for image files
+            if (fileName.toLowerCase().endsWith('.pdf')) {
+                const iframe = document.createElement('iframe');
+                iframe.src = fileName;
+                modalBody.appendChild(iframe);
+            } else {
+                const img = document.createElement('img');
+                img.src = fileName;
+                img.alt = "Certificate";
+                modalBody.appendChild(img);
+            }
+            
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore background scrolling
+            
+            // Allow animation to finish before clearing content
+            setTimeout(() => {
+                modalBody.innerHTML = '';
+            }, 300);
+        }
+
+        certButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const file = btn.getAttribute('data-cert');
+                if(file) openModal(file);
+            });
+        });
+
+        modalClose.addEventListener('click', closeModal);
+
+        // Close on clicking outside the modal content
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+
+        // Close on Escape key press
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // ==========================================
+        // 5. Workflow Parallax Effect
+        // ==========================================
+        const workflowContainer = document.getElementById('workflowContainer');
+        const aboutSection = document.getElementById('about');
+
+        if (workflowContainer && aboutSection) {
+            aboutSection.addEventListener('mousemove', (e) => {
+                // Calculate mouse position relative to the center of the about section
+                const rect = aboutSection.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                
+                // Extremely subtle movement to maintain a premium feel
+                const moveX = (e.clientX - centerX) * 0.015;
+                const moveY = (e.clientY - centerY) * 0.015;
+
+                workflowContainer.style.transform = `perspective(1000px) rotateY(${moveX}deg) rotateX(${-moveY}deg)`;
+            });
+
+            aboutSection.addEventListener('mouseleave', () => {
+                workflowContainer.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg)`;
+            });
+        }
+        
+    </script>
+</body>
+</html>

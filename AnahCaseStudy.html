@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anah | Case Study - Ghadi Saeed</title>
+    <meta name="description" content="Case study for Anah - Arabic AI-Powered Mental Health Support Platform.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           CSS VARIABLES & GLOBAL STYLES (Matching Main Portfolio)
+           ========================================================================== */
+        :root {
+            --bg-base: #EEE8E5; 
+            --bg-glass: rgba(255, 255, 255, 0.6); 
+            --bg-glass-hover: rgba(255, 255, 255, 0.9);
+            --glass-border: rgba(90, 68, 82, 0.1); 
+            
+            --primary: #5A4452; 
+            --secondary: #A7AFC2; 
+            --accent: #E8BBB6; 
+            --tertiary: #C8D0CF; 
+            
+            --text-main: #5A4452; 
+            --text-muted: #7a6b74; 
+            
+            --font-en: 'Inter', sans-serif;
+            --font-ar: 'Cairo', sans-serif;
+            
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --radius-md: 16px;
+            --radius-lg: 24px;
+        }
+
+        html[lang="en"] { font-family: var(--font-en); }
+        html[lang="ar"] { font-family: var(--font-ar); }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-base); color: var(--text-main); line-height: 1.7; overflow-x: hidden; }
+
+        /* Background Glows */
+        .bg-glow {
+            position: fixed; border-radius: 50%; filter: blur(120px); z-index: -1; opacity: 0.6; 
+            animation: floatGlow 10s infinite alternate;
+        }
+        .glow-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: rgba(232, 187, 182, 0.4); } 
+        .glow-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: rgba(167, 175, 194, 0.4); } 
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 30px) scale(1.1); }
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 { color: var(--text-main); font-weight: 700; line-height: 1.3; }
+        p { color: var(--text-muted); margin-bottom: 1rem; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { padding-left: 1.5rem; margin-bottom: 1.5rem; color: var(--text-muted); }
+        [dir="rtl"] ul { padding-left: 0; padding-right: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title {
+            font-size: 2rem; margin-bottom: 2rem; color: var(--primary);
+            border-bottom: 2px solid rgba(90, 68, 82, 0.1); padding-bottom: 0.5rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.5rem;
+            border-radius: 30px; font-weight: 600; cursor: pointer; transition: var(--transition);
+            border: 1px solid transparent; font-family: inherit;
+        }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), #7c6273); color: #EEE8E5; box-shadow: 0 4px 15px rgba(90, 68, 82, 0.2); }
+        .btn-primary:hover { box-shadow: 0 6px 20px rgba(90, 68, 82, 0.3); transform: translateY(-2px); color: #fff; }
+        .btn-outline { background: var(--bg-glass); border-color: var(--glass-border); color: var(--primary); backdrop-filter: blur(10px); }
+        .btn-outline:hover { background: var(--bg-glass-hover); border-color: var(--primary); transform: translateY(-2px); }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 5rem 2rem; }
+
+        /* Navbar */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 1.5rem 2rem;
+            background: rgba(238, 232, 229, 0.85); backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border); z-index: 900;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); letter-spacing: 1px; }
+
+        /* Lang Switcher */
+        .lang-switch {
+            background: var(--bg-glass);
+            border: 1px solid var(--glass-border);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+            margin-left: auto;
+            margin-right: 1rem;
+        }
+        [dir="rtl"] .lang-switch { margin-left: 1rem; margin-right: auto; }
+        .lang-switch:hover { background: var(--bg-glass-hover); border-color: var(--primary); }
+
+        /* Case Study Specific Layouts */
+        .hero-section {
+            padding-top: 120px; text-align: center; margin-bottom: 4rem;
+        }
+        .hero-section h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .hero-section p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem auto; }
+        .hero-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+        .content-box {
+            background: var(--bg-glass); border: 1px solid var(--glass-border);
+            padding: 3rem; border-radius: var(--radius-lg); margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(90, 68, 82, 0.03); backdrop-filter: blur(10px);
+        }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        
+        .feature-list li, .tech-list li {
+            list-style: none; position: relative; padding-left: 1.5rem;
+        }
+        [dir="rtl"] .feature-list li, [dir="rtl"] .tech-list li {
+            padding-left: 0; padding-right: 1.5rem;
+        }
+        .feature-list li::before, .tech-list li::before {
+            content: '\f00c'; font-family: 'FontAwesome'; position: absolute;
+            left: 0; color: var(--primary); font-size: 0.9rem; top: 2px;
+        }
+        [dir="rtl"] .feature-list li::before, [dir="rtl"] .tech-list li::before {
+            left: auto; right: 0;
+        }
+
+        .challenge-card {
+            background: rgba(255, 255, 255, 0.4); border: 1px solid rgba(90, 68, 82, 0.1);
+            padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;
+        }
+        .challenge-card h4 { color: #d9534f; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .challenge-card h4.solution { color: #5cb85c; margin-top: 1rem; }
+        
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; margin-top: 2rem;}
+        .stat-box { text-align: center; padding: 1.5rem; background: rgba(255,255,255,0.4); border-radius: 16px; border: 1px solid var(--glass-border);}
+        .stat-number { font-size: 2.5rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; direction: ltr; display: inline-block; }
+
+        footer { text-align: center; padding: 2rem; border-top: 1px solid var(--glass-border); font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2.2rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .content-box { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Effects -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo" data-i18n="logo">Ghadi.</div>
+        <button class="lang-switch" id="langSwitch" aria-label="Toggle Language">
+            <i class="fa-solid fa-globe"></i> <span id="langText">عربي</span>
+        </button>
+        <a href="index.html" class="btn btn-outline" style="padding: 0.5rem 1rem;">
+            <i class="fa-solid fa-arrow-left" id="backIcon"></i> <span data-i18n="btn_back">Back to Portfolio</span>
+        </a>
+    </nav>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1 class="text-gradient" data-i18n="hero_title">Anah</h1>
+            <p data-i18n="hero_subtitle">Arabic AI-Powered Mental Health Support Platform</p>
+            <div class="hero-actions">
+                <a href="https://github.com/galaadnan/anahWeb" target="_blank" class="btn btn-primary"><i class="fa-brands fa-github"></i> <span data-i18n="btn_github">GitHub Repository</span></a>
+                <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-home"></i> <span data-i18n="btn_portfolio">Portfolio</span></a>
+            </div>
+        </div>
+
+        <!-- Project Overview & Problem Statement -->
+        <div class="content-box grid-2">
+            <div>
+                <h2 class="section-title" data-i18n="sec_overview">Project Overview</h2>
+                <p data-i18n="overview_p1">Anah is an Arabic-first, AI-powered web application designed to help users reflect on and better understand their emotional well-being. The platform combines guided journaling, mood tracking, Arabic emotion analysis, personalized recommendations, visual emotion insights, daily task support, and an AI-powered conversational assistant in one culturally adapted experience.</p>
+                <p data-i18n="overview_p2">The final system uses a hybrid AI architecture: a MARBERTv2-based classifier analyzes Arabic journal entries, while an OpenAI-powered chatbot generates context-aware supportive responses.</p>
+                <ul style="list-style-type: none; padding: 0; margin-top: 1rem;">
+                    <li><strong data-i18n="ov_type_label">Type:</strong> <span data-i18n="ov_type_val">Graduation Project (University of Jeddah, 2026)</span></li>
+                    <li><strong data-i18n="ov_team_label">Team Size:</strong> <span data-i18n="ov_team_val">5 students</span></li>
+                </ul>
+            </div>
+            <div>
+                <h2 class="section-title" data-i18n="sec_problem">Problem Statement</h2>
+                <p data-i18n="problem_p1">The project responds to a gap identified through the team's research: Arabic-speaking users have limited access to digital mental-health tools that combine cultural relevance with intelligent emotional analysis and personalized self-reflection features.</p>
+                <p data-i18n="problem_p2">Existing solutions often focus on therapist communication or general wellness content, while offering limited Arabic emotion detection, mood tracking, personalization, or interactive support. Anah was designed as a unified Arabic experience bridging this gap as a self-reflection tool.</p>
+            </div>
+        </div>
+
+        <!-- Technologies Used -->
+        <div class="content-box">
+            <h2 class="section-title" data-i18n="sec_tech">Technologies Used</h2>
+            <div class="grid-2">
+                <div>
+                    <h3 style="margin-bottom: 1rem; color: var(--primary);" data-i18n="tech_front_title">Frontend & Cloud</h3>
+                    <ul class="tech-list">
+                        <li data-i18n="tech_front_1">HTML5, CSS3, and JavaScript</li>
+                        <li data-i18n="tech_front_2">Responsive and mobile styling</li>
+                        <li data-i18n="tech_front_3">Firebase Authentication & Cloud Firestore</li>
+                        <li data-i18n="tech_front_4">Render for application deployment</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 1rem; color: var(--primary);" data-i18n="tech_back_title">Backend & AI</h3>
+                    <ul class="tech-list">
+                        <li data-i18n="tech_back_1">Python and Flask</li>
+                        <li data-i18n="tech_back_2">Hugging Face Transformers</li>
+                        <li data-i18n="tech_back_3">MARBERTv2-based Arabic emotion classifier</li>
+                        <li data-i18n="tech_back_4">Sentence segmentation and emotion aggregation</li>
+                        <li data-i18n="tech_back_5">OpenAI API with <code>gpt-4o-mini</code></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="content-box">
+            <h2 class="section-title" data-i18n="sec_features">Key Features</h2>
+            <ul class="feature-list" style="column-count: 2; column-gap: 2rem;">
+                <li><strong data-i18n="feat_1_title">Arabic journaling:</strong> <span data-i18n="feat_1_desc">Structured writing space with prompts, image support, and streaks.</span></li>
+                <li><strong data-i18n="feat_2_title">Emotion analysis:</strong> <span data-i18n="feat_2_desc">Sentence-level processing using a MARBERTv2-based model.</span></li>
+                <li><strong data-i18n="feat_3_title">Emotion detection:</strong> <span data-i18n="feat_3_desc">Multiple detected emotions ranked using frequency and confidence scores.</span></li>
+                <li><strong data-i18n="feat_4_title">Mood selection:</strong> <span data-i18n="feat_4_desc">Emoji-based alternative to journal input.</span></li>
+                <li><strong data-i18n="feat_5_title">Emotion Analysis Dashboard:</strong> <span data-i18n="feat_5_desc">Interactive visualizations of detected emotions, emotion distributions, and historical trends.</span></li>
+                <li><strong data-i18n="feat_6_title">Personalized recommendations:</strong> <span data-i18n="feat_6_desc">Personalized well-being recommendations based on detected emotions.</span></li>
+                <li><strong data-i18n="feat_7_title">Emotion-aware quotes:</strong> <span data-i18n="feat_7_desc">Motivational quotes based on detected mood.</span></li>
+                <li><strong data-i18n="feat_8_title">AI-powered chatbot:</strong> <span data-i18n="feat_8_desc">Context-aware, supportive Arabic responses.</span></li>
+                <li><strong data-i18n="feat_9_title">Message to Yourself:</strong> <span data-i18n="feat_9_desc">Reflective messaging with scheduling.</span></li>
+                <li><strong data-i18n="feat_10_title">Daily task checklist:</strong> <span data-i18n="feat_10_desc">Task tracking with durations.</span></li>
+                <li><strong data-i18n="feat_11_title">Cloud data:</strong> <span data-i18n="feat_11_desc">Firebase-backed accounts and secure storage.</span></li>
+                <li><strong data-i18n="feat_12_title">Privacy focus:</strong> <span data-i18n="feat_12_desc">Automatic logouts after 5 minutes of inactivity.</span></li>
+            </ul>
+        </div>
+
+        <!-- My Contributions -->
+        <div class="content-box" style="border-color: var(--primary); background: rgba(255, 255, 255, 0.8);">
+            <h2 class="section-title" style="border-bottom-color: var(--primary);" data-i18n="sec_contrib">My Confirmed Contributions</h2>
+            <p data-i18n="contrib_desc">I contributed across frontend development, responsive UX, and AI feature integration. My confirmed contributions to the project include:</p>
+            <ul class="feature-list">
+                <li data-i18n="contrib_1">Added the OpenAI chat endpoint and upgraded the chatbot to <code>gpt-4o-mini</code>.</li>
+                <li data-i18n="contrib_2">Enhanced chatbot context, lightweight emotional memory, prompt behavior, and response constraints.</li>
+                <li data-i18n="contrib_3">Implemented the "Message to Yourself" interface, scheduling logic, and confirmation flow.</li>
+                <li data-i18n="contrib_4">Developed and refined mood-based motivational quote logic and added the Arabic quote dataset.</li>
+                <li data-i18n="contrib_5">Fixed journal-versus-emoji input priority and synchronized mood results across experiences.</li>
+                <li data-i18n="contrib_6">Redesigned key mobile layouts across navigation, the home experience, journaling, analysis, and the chatbot.</li>
+                <li data-i18n="contrib_7">Improved the task-duration picker and custom-duration workflow.</li>
+            </ul>
+        </div>
+
+        <!-- Challenges & Solutions -->
+        <div class="content-box">
+            <h2 class="section-title" data-i18n="sec_challenges">Challenges and Solutions</h2>
+            
+            <div class="challenge-card">
+                <h4><i class="fa-solid fa-triangle-exclamation"></i> <span data-i18n="chal_1_title">Limited Arabic emotion detection</span></h4>
+                <p data-i18n="chal_1_desc">The initial system relied on rule-based analysis and emoji selection, which could not reliably represent Arabic dialects or mixed emotional states.</p>
+                <h4 class="solution"><i class="fa-solid fa-check-circle"></i> <span data-i18n="sol_title">Solution</span></h4>
+                <p data-i18n="chal_1_sol">Integrated a MARBERTv2-based classifier, added sentence-level analysis, and combined frequency with confidence scores to identify primary and secondary emotions.</p>
+            </div>
+
+            <div class="challenge-card">
+                <h4><i class="fa-solid fa-triangle-exclamation"></i> <span data-i18n="chal_2_title">Repetitive chatbot responses</span></h4>
+                <p data-i18n="chal_2_desc">The original rule-based chatbot produced predefined, repetitive responses and struggled with unexpected input.</p>
+                <h4 class="solution"><i class="fa-solid fa-check-circle"></i> <span data-i18n="sol_title">Solution</span></h4>
+                <p data-i18n="chal_2_sol">Integrated the OpenAI API using <code>gpt-4o-mini</code> through the Flask backend, adding emotional context, lightweight memory, and response constraints.</p>
+            </div>
+
+            <div class="challenge-card">
+                <h4><i class="fa-solid fa-triangle-exclamation"></i> <span data-i18n="chal_3_title">Conflicting emotion inputs</span></h4>
+                <p data-i18n="chal_3_desc">Journal text and emoji mood selection could create conflicting analysis states across the application.</p>
+                <h4 class="solution"><i class="fa-solid fa-check-circle"></i> <span data-i18n="sol_title">Solution</span></h4>
+                <p data-i18n="chal_3_sol">Changed the system to accept one input method for each analysis, with strict synchronization logic across the home, journal, and analysis pages.</p>
+            </div>
+
+            <div class="challenge-card">
+                <h4><i class="fa-solid fa-triangle-exclamation"></i> <span data-i18n="chal_4_title">Mobile usability issues</span></h4>
+                <p data-i18n="chal_4_desc">Complex dashboards, navigation, forms, and chatbot interactions needed to remain usable on smaller screens.</p>
+                <h4 class="solution"><i class="fa-solid fa-check-circle"></i> <span data-i18n="sol_title">Solution</span></h4>
+                <p data-i18n="chal_4_sol">Redesigned responsive layouts for home, journal, and analysis; adapted navigation; and added chatbot typing indicators for clearer state feedback.</p>
+            </div>
+        </div>
+
+        <!-- Project Outcomes -->
+        <div class="content-box">
+            <h2 class="section-title" data-i18n="sec_outcomes">Project Outcomes</h2>
+            <p data-i18n="outcomes_desc">The final platform was evaluated by <strong>57 users</strong>. End-to-end testing successfully connected the frontend, Flask application, Firebase, MARBERTv2 inference, and OpenAI chatbot. User feedback highlights include:</p>
+            
+            <div class="stat-grid">
+                <div class="stat-box">
+                    <div class="stat-number">86%</div>
+                    <p style="font-size: 0.9rem; margin:0;" data-i18n="stat_1">Found visual graphs & recommendations helpful</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">84%</div>
+                    <p style="font-size: 0.9rem; margin:0;" data-i18n="stat_2">Rated emotion detection as very accurate</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">82%</div>
+                    <p style="font-size: 0.9rem; margin:0;" data-i18n="stat_3">Found the interface very easy to use</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">80%</div>
+                    <p style="font-size: 0.9rem; margin:0;" data-i18n="stat_4">Found the AI chatbot very helpful</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Ghadi Saeed. <span data-i18n="footer_text">Case Study Document.</span></p>
+    </footer>
+
+    <!-- Translation Logic -->
+    <script>
+        const translations = {
+            en: {
+                logo: "Ghadi.",
+                btn_back: "Back to Portfolio",
+                hero_title: "Anah",
+                hero_subtitle: "Arabic AI-Powered Mental Health Support Platform",
+                btn_github: "GitHub Repository",
+                btn_portfolio: "Portfolio",
+                sec_overview: "Project Overview",
+                overview_p1: "Anah is an Arabic-first, AI-powered web application designed to help users reflect on and better understand their emotional well-being. The platform combines guided journaling, mood tracking, Arabic emotion analysis, personalized recommendations, visual emotion insights, daily task support, and an AI-powered conversational assistant in one culturally adapted experience.",
+                overview_p2: "The final system uses a hybrid AI architecture: a MARBERTv2-based classifier analyzes Arabic journal entries, while an OpenAI-powered chatbot generates context-aware supportive responses.",
+                ov_type_label: "Type:",
+                ov_type_val: "Graduation Project (University of Jeddah, 2026)",
+                ov_team_label: "Team Size:",
+                ov_team_val: "5 students",
+                sec_problem: "Problem Statement",
+                problem_p1: "The project responds to a gap identified through the team's research: Arabic-speaking users have limited access to digital mental-health tools that combine cultural relevance with intelligent emotional analysis and personalized self-reflection features.",
+                problem_p2: "Existing solutions often focus on therapist communication or general wellness content, while offering limited Arabic emotion detection, mood tracking, personalization, or interactive support. Anah was designed as a unified Arabic experience bridging this gap as a self-reflection tool.",
+                sec_tech: "Technologies Used",
+                tech_front_title: "Frontend & Cloud",
+                tech_front_1: "HTML5, CSS3, and JavaScript",
+                tech_front_2: "Responsive and mobile styling",
+                tech_front_3: "Firebase Authentication & Cloud Firestore",
+                tech_front_4: "Render for application deployment",
+                tech_back_title: "Backend & AI",
+                tech_back_1: "Python and Flask",
+                tech_back_2: "Hugging Face Transformers",
+                tech_back_3: "MARBERTv2-based Arabic emotion classifier",
+                tech_back_4: "Sentence segmentation and emotion aggregation",
+                tech_back_5: "OpenAI API with gpt-4o-mini",
+                sec_features: "Key Features",
+                feat_1_title: "Arabic journaling:", feat_1_desc: "Structured writing space with prompts, image support, and streaks.",
+                feat_2_title: "Emotion analysis:", feat_2_desc: "Sentence-level processing using a MARBERTv2-based model.",
+                feat_3_title: "Emotion detection:", feat_3_desc: "Multiple detected emotions ranked using frequency and confidence scores.",
+                feat_4_title: "Mood selection:", feat_4_desc: "Emoji-based alternative to journal input.",
+                feat_5_title: "Emotion Analysis Dashboard:", feat_5_desc: "Interactive visualizations of detected emotions, emotion distributions, and historical trends.",
+                feat_6_title: "Personalized recommendations:", feat_6_desc: "Personalized well-being recommendations based on detected emotions.",
+                feat_7_title: "Emotion-aware quotes:", feat_7_desc: "Motivational quotes based on detected mood.",
+                feat_8_title: "AI-powered chatbot:", feat_8_desc: "Context-aware, supportive Arabic responses.",
+                feat_9_title: "Message to Yourself:", feat_9_desc: "Reflective messaging with scheduling.",
+                feat_10_title: "Daily task checklist:", feat_10_desc: "Task tracking with durations.",
+                feat_11_title: "Cloud data:", feat_11_desc: "Firebase-backed accounts and secure storage.",
+                feat_12_title: "Privacy focus:", feat_12_desc: "Automatic logouts after 5 minutes of inactivity.",
+                sec_contrib: "My Confirmed Contributions",
+                contrib_desc: "I contributed across frontend development, responsive UX, and AI feature integration. My confirmed contributions to the project include:",
+                contrib_1: "Added the OpenAI chat endpoint and upgraded the chatbot to gpt-4o-mini.",
+                contrib_2: "Enhanced chatbot context, lightweight emotional memory, prompt behavior, and response constraints.",
+                contrib_3: "Implemented the \"Message to Yourself\" interface, scheduling logic, and confirmation flow.",
+                contrib_4: "Developed and refined mood-based motivational quote logic and added the Arabic quote dataset.",
+                contrib_5: "Fixed journal-versus-emoji input priority and synchronized mood results across experiences.",
+                contrib_6: "Redesigned key mobile layouts across navigation, the home experience, journaling, analysis, and the chatbot.",
+                contrib_7: "Improved the task-duration picker and custom-duration workflow.",
+                sec_challenges: "Challenges and Solutions",
+                sol_title: "Solution",
+                chal_1_title: "Limited Arabic emotion detection",
+                chal_1_desc: "The initial system relied on rule-based analysis and emoji selection, which could not reliably represent Arabic dialects or mixed emotional states.",
+                chal_1_sol: "Integrated a MARBERTv2-based classifier, added sentence-level analysis, and combined frequency with confidence scores to identify primary and secondary emotions.",
+                chal_2_title: "Repetitive chatbot responses",
+                chal_2_desc: "The original rule-based chatbot produced predefined, repetitive responses and struggled with unexpected input.",
+                chal_2_sol: "Integrated the OpenAI API using gpt-4o-mini through the Flask backend, adding emotional context, lightweight memory, and response constraints.",
+                chal_3_title: "Conflicting emotion inputs",
+                chal_3_desc: "Journal text and emoji mood selection could create conflicting analysis states across the application.",
+                chal_3_sol: "Changed the system to accept one input method for each analysis, with strict synchronization logic across the home, journal, and analysis pages.",
+                chal_4_title: "Mobile usability issues",
+                chal_4_desc: "Complex dashboards, navigation, forms, and chatbot interactions needed to remain usable on smaller screens.",
+                chal_4_sol: "Redesigned responsive layouts for home, journal, and analysis; adapted navigation; and added chatbot typing indicators for clearer state feedback.",
+                sec_outcomes: "Project Outcomes",
+                outcomes_desc: "The final platform was evaluated by 57 users. End-to-end testing successfully connected the frontend, Flask application, Firebase, MARBERTv2 inference, and OpenAI chatbot. User feedback highlights include:",
+                stat_1: "Found visual graphs & recommendations helpful",
+                stat_2: "Rated emotion detection as very accurate",
+                stat_3: "Found the interface very easy to use",
+                stat_4: "Found the AI chatbot very helpful",
+                footer_text: "Case Study Document."
+            },
+            ar: {
+                logo: "غدي",
+                btn_back: "العودة إلى Portfolio",
+                hero_title: "أناة",
+                hero_subtitle: "منصة عربية للصحة النفسية مدعومة بالذكاء الاصطناعي",
+                btn_github: "مستودع GitHub",
+                btn_portfolio: "ملف الأعمال",
+                sec_overview: "نظرة عامة على المشروع",
+                overview_p1: "أناة هو تطبيق ويب مدعوم بالذكاء الاصطناعي مصمم خصيصاً للمستخدمين الناطقين باللغة العربية لمساعدتهم على فهم مشاعرهم والتأمل في صحتهم النفسية.تجمع المنصة بين تدوين اليوميات الموجّه ، تتبع الحالة المزاجية، تحليل المشاعر باللغة العربية، التوصيات المخصصة، الرؤى البصرية للمشاعر، دعم المهام اليومية، ومساعد محادثة ذكي في تجربة واحدة متوافقة ثقافياً.",
+                overview_p2: "يستخدم النظام النهائي بنية هجينة للذكاء الاصطناعي: يقوم مصنف مبني على MARBERTv2 بتحليل مدخلات اليوميات العربية، بينما يقوم المساعد الذكي المدعوم من OpenAI بإنشاء ردود داعمة تراعي سياق مشاعر المستخدم.",
+                ov_type_label: "النوع:",
+                ov_type_val: "مشروع تخرج (جامعة جدة، 2026)",
+                ov_team_label: "حجم الفريق:",
+                ov_team_val: "5 طالبات",
+                sec_problem: "بيان المشكلة",
+                problem_p1: "جاء هذا المشروع استجابة لفجوة تم تحديدها من خلال بحث الفريق: المستخدمون الناطقون باللغة العربية لديهم وصول محدود إلى أدوات الصحة النفسية الرقمية التي تجمع بين الملاءمة الثقافية، والتحليل الذكي للمشاعر، وميزات التأمل الذاتي المخصصة.",
+                problem_p2: "غالباً ما تركز الحلول الحالية على التواصل مع المعالجين النفسيين أو محتوى العافية العام، مع تقديم إمكانيات محدودة في اكتشاف المشاعر باللغة العربية، أو تتبع الحالة المزاجية، أو التخصيص، أو الدعم التفاعلي. تم تصميم منصة أناة لتكون تجربة عربية موحدة تسد هذه الفجوة كأداة للتأمل الذاتي.",
+                sec_tech: "التقنيات المستخدمة",
+                tech_front_title: "الواجهات الأمامية والخدمات السحابية",
+                tech_front_1: "HTML5 و CSS3 و JavaScript",
+                tech_front_2: "تصميم متجاوب ومناسب للهواتف المحمولة",
+                tech_front_3: "Firebase Authentication وCloud Firestore Database",
+                tech_front_4: "Render لنشر التطبيق (Deployment)",
+                tech_back_title: "الواجهات الخلفية والذكاء الاصطناعي",
+                tech_back_1: "Python (Flask Framework)",
+                tech_back_2: "Hugging Face Transformers",
+                tech_back_3: "نموذج تصنيف المشاعر العربية المبني على MARBERTv2",
+                tech_back_4: "تجزئة الجمل وتجميع نتائج المشاعر",
+                tech_back_5: "OpenAI API باستخدام نموذج gpt-4o-mini",
+                sec_features: "الميزات الرئيسية",
+                feat_1_title: "التدوين باللغة العربية:", feat_1_desc: "مساحة كتابة منظمة مع مطالبات توجيهية، ودعم إرفاق الصور، وتتبع أيام التدوين المستمرة.",
+                feat_2_title: "تحليل المشاعر:", feat_2_desc: "معالجة النصوص على مستوى الجملة باستخدام نموذج مبني على MARBERTv2.",
+                feat_3_title: "اكتشاف المشاعر:", feat_3_desc: "ترتيب المشاعر المتعددة المكتشفة بناءً على التكرار ودرجات الثقة.",
+                feat_4_title: "تحديد الحالة المزاجية:", feat_4_desc: "بديل سريع لإدخال اليوميات باستخدام الرموز التعبيرية.",
+                feat_5_title: "لوحة معلومات تحليل المشاعر:", feat_5_desc: "تمثيلات بصرية تفاعلية للمشاعر المكتشفة، وتوزيعاتها، والاتجاهات التاريخية.",
+                feat_6_title: "توصيات مخصصة:", feat_6_desc: "توصيات عافية مخصصة بناءً على المشاعر المكتشفة للمستخدم.",
+                feat_7_title: "اقتباسات تفاعلية:", feat_7_desc: "اقتباسات تحفيزية تتغير بناءً على الحالة المزاجية المكتشفة.",
+                feat_8_title: "مساعد ذكي (Chatbot):", feat_8_desc: "ردود داعمة باللغة العربية تراعي سياق حديث ومشاعر المستخدم.",
+                feat_9_title: "رسالة إلى نفسك:", feat_9_desc: "ميزة تتيح كتابة رسائل تأملية وجدولتها لتصل في المستقبل.",
+                feat_10_title: "قائمة المهام اليومية:", feat_10_desc: "تتبع المهام مع تحديد الفترات الزمنية لإنجازها.",
+                feat_11_title: "بيانات سحابية:", feat_11_desc: "حسابات مدعومة بـ Firebase مع تخزين آمن للمعلومات.",
+                feat_12_title: "التركيز على الخصوصية:", feat_12_desc: "تسجيل الخروج التلقائي بعد 5 دقائق من عدم النشاط.",
+                sec_contrib: "أبرز مساهماتي",
+                contrib_desc: "ساهمت في تطوير الواجهات الأمامية، وتحسين تجربة المستخدم المتجاوبة، ودمج ميزات الذكاء الاصطناعي. تضمنت مساهماتي المؤكدة في المشروع ما يلي:",
+                contrib_1: "دمج OpenAI API مع المساعد الذكي. وترقية المساعد الذكي لاستخدام نموذج gpt-4o-mini.",
+                contrib_2: "تحسين سياق المحادثة في المساعد الذكي، وإضافة ذاكرة عاطفية خفيفة، وضبط هندسة الأوامر (Prompts) وقيود الردود.",
+                contrib_3: "تنفيذ واجهة ميزة \"رسالة إلى نفسك\"، وبرمجة منطق الجدولة، وتسلسل التأكيد.",
+                contrib_4: "تطوير وتحسين المنطق البرمجي للاقتباسات التحفيزية المبنية على الحالة المزاجية وإضافة قاعدة بيانات الاقتباسات العربية.",
+                contrib_5: "حل مشكلة أولوية الإدخال بين النصوص والرموز التعبيرية ومزامنة نتائج الحالة المزاجية عبر صفحات التطبيق.",
+                contrib_6: "إعادة تصميم تخطيطات الهواتف المحمولة الرئيسية في شريط التنقل، الصفحة الرئيسية، التدوين، التحليل، والمساعد الذكي.",
+                contrib_7: "تحسين أداة اختيار مدة المهام وسير عمل تحديد المدة المخصصة.",
+                sec_challenges: "التحديات والحلول",
+                sol_title: "الحل",
+                chal_1_title: "قصور في اكتشاف المشاعر باللغة العربية",
+                chal_1_desc: "اعتمد النظام الأولي على التحليل القائم على القواعد واختيار الرموز التعبيرية، مما لم يكن كافياً لتمثيل اللهجات العربية أو الحالات العاطفية المختلطة بدقة.",
+                chal_1_sol: "تم دمج مصنف مبني على MARBERTv2، وإضافة ميزة تحليل النصوص على مستوى الجملة، والجمع بين تكرار المشاعر ودرجات الثقة لتحديد المشاعر الأساسية والثانوية بدقة.",
+                chal_2_title: "استجابات متكررة من المساعد الذكي",
+                chal_2_desc: "أنتج المساعد الذكي الأولي القائم على القواعد ردوداً محددة مسبقاً ومتكررة، وواجه صعوبة في التعامل مع المدخلات غير المتوقعة.",
+                chal_2_sol: "تم دمج OpenAI API باستخدام gpt-4o-mini من خلال الواجهة الخلفية Flask، مع تزويد النموذج بسياق عاطفي، وذاكرة خفيفة، وقيود مخصصة للردود الداعمة.",
+                chal_3_title: "تعارض بين مدخلات المشاعر",
+                chal_3_desc: "أدى وجود إدخال اليوميات النصية واختيار الحالة المزاجية بالرموز التعبيرية في نفس الوقت إلى إنشاء حالات تحليل متعارضة عبر التطبيق.",
+                chal_3_sol: "تم تعديل النظام لقبول طريقة إدخال واحدة لكل عملية تحليل، مع تطبيق منطق مزامنة صارم لضمان اتساق البيانات عبر الصفحة الرئيسية وصفحات اليوميات والتحليل.",
+                chal_4_title: "مشكلات قابلية الاستخدام على الهواتف",
+                chal_4_desc: "كانت لوحات المعلومات المعقدة، والتنقل، والنماذج، وتفاعلات المساعد الذكي بحاجة إلى تحسين لتعمل بسلاسة على الشاشات الصغيرة.",
+                chal_4_sol: "تمت إعادة تصميم التخطيطات لتكون متجاوبة تماماً للصفحة الرئيسية واليوميات والتحليل؛ وتعديل شريط التنقل؛ وإضافة مؤشرات كتابة للمساعد الذكي لتقديم ملاحظات أوضح لحالة النظام.",
+                sec_outcomes: "نتائج المشروع",
+                outcomes_desc: "تم تقييم المنصة النهائية من قبل 57 مستخدماً. أكدت الاختبارات الشاملة (End-to-End) في ربط الواجهة الأمامية بتطبيق Flask، وقاعدة بيانات Firebase، واستنتاجات MARBERTv2، والمساعد الذكي OpenAI. تضمنت أبرز تعليقات المستخدمين ما يلي:",
+                stat_1: "وجدوا الرسوم البيانية والتوصيات مفيدة",
+                stat_2: "قيموا دقة اكتشاف المشاعر بأنها دقيقة جداً",
+                stat_3: "وجدوا واجهة المستخدم سهلة الاستخدام جداً",
+                stat_4: "وجدوا المساعد الذكي مفيداً جداً",
+                footer_text: "وثيقة دراسة حالة لمشروع ANAH"
+            }
+        };
+
+        let currentLang = 'en';
+
+        // Add a helper function to recursively find and replace text nodes inside elements containing HTML
+        function replaceTextKeepingHTML(element, newHtml) {
+             // For elements that have child elements (like <code>, <i>, <strong>, <span>)
+             // We can just set innerHTML if the translation itself contains the needed tags.
+             // We will update the translation logic to allow setting innerHTML to support inline tags.
+             element.innerHTML = newHtml;
+        }
+
+        document.getElementById('langSwitch').addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            
+            // Switch direction and lang attributes
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            
+            // Update the toggle button text
+            document.getElementById('langText').textContent = currentLang === 'en' ? 'عربي' : 'EN';
+            
+            // Update the back arrow direction specifically
+            const backIcon = document.getElementById('backIcon');
+            if (currentLang === 'ar') {
+                backIcon.classList.remove('fa-arrow-left');
+                backIcon.classList.add('fa-arrow-right');
+            } else {
+                backIcon.classList.remove('fa-arrow-right');
+                backIcon.classList.add('fa-arrow-left');
+            }
+            
+            // Apply translations using innerHTML to preserve inline tags like <code>, <strong>, <i class="fa-solid..."></i>
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    replaceTextKeepingHTML(el, translations[currentLang][key]);
+                }
+            });
+            
+            // Replace text inside spans that follow font-awesome icons where the span doesn't have a direct data-i18n
+            // The logic above using innerHTML requires us to move the data-i18n tags slightly to cover the text specifically
+            // I have wrapped texts in <span> tags where necessary in the HTML above to make this clean.
+        });
+    </script>
+</body>
+</html>
