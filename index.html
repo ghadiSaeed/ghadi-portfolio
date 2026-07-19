@@ -776,9 +776,12 @@
 
         .modal-content {
             position: relative;
+            /* Update to match the aspect ratio of a typical certificate */
             width: 90%;
-            max-width: 1000px;
-            height: 85vh;
+            max-width: 900px; /* Adjusted max-width */
+            /* Do NOT force height to 85vh as it distorts portrait/tall PDFs on mobile */
+            /* Instead, allow the content to dictate aspect ratio up to a max height */
+            height: 85vh; /* Keep for desktop, adjust for mobile below */
             background: var(--bg-base);
             padding: 10px;
             border-radius: var(--radius-md);
@@ -838,7 +841,7 @@
         .modal-body img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: contain; /* Ensure image fits perfectly within bounds */
         }
 
         /* Responsive */
@@ -866,9 +869,9 @@
             .hero-btns { justify-content: center; gap: 0.8rem; }
             .hero-btns .btn { padding: 0.75rem 1.2rem; font-size: 0.9rem; }
 
-            /* Align Briefcase and Location Icons correctly on mobile with text */
+            /* Fix Hero Icon Alignment on Mobile */
             .hero-info-list li {
-                align-items: center; /* keep vertical center alignment */
+                align-items: flex-start; /* Align icon to the top of the text */
                 text-align: left;
             }
             
@@ -877,7 +880,7 @@
             }
 
             .hero-info-list li i {
-                margin-top: 0; /* Reset previous margin-top */
+                margin-top: 4px; /* Slight adjustment to match the first line of text */
             }
 
             /* Skills Section Mobile */
@@ -898,6 +901,25 @@
             .skill-tag {
                 font-size: 0.85rem;
                 padding: 0.5rem 1rem;
+            }
+
+            /* Fix for overlapping 2-column feature list on mobile (from Anah case study fix) */
+            .feature-list {
+                column-count: 1 !important;
+            }
+
+            /* FIX FOR CERTIFICATE MODAL ON MOBILE */
+            .modal-content {
+                /* Allow the height to adjust based on the content (PDF/img) on mobile */
+                height: 75vh; /* Reduce slightly to fit mobile viewports nicely */
+                max-height: 800px;
+                width: 95%; /* Make slightly wider on mobile for better fit */
+            }
+            
+            /* Specific fix to prevent PDF cropping on iOS Safari */
+            .modal-body {
+                -webkit-overflow-scrolling: touch;
+                overflow-y: auto; /* allow scrolling within the body if the PDF is too tall */
             }
         }
     </style>
@@ -1691,7 +1713,23 @@
             if (fileName.toLowerCase().endsWith('.pdf')) {
                 const iframe = document.createElement('iframe');
                 iframe.src = fileName;
-                modalBody.appendChild(iframe);
+                // Add a wrapping div for responsive iframe handling
+                const wrapper = document.createElement('div');
+                wrapper.style.width = '100%';
+                wrapper.style.height = '100%';
+                wrapper.style.overflow = 'hidden';
+                wrapper.style.position = 'relative';
+                
+                // Style iframe to fit the wrapper
+                iframe.style.position = 'absolute';
+                iframe.style.top = '0';
+                iframe.style.left = '0';
+                iframe.style.width = '100%';
+                iframe.style.height = '100%';
+                iframe.style.border = 'none';
+                
+                wrapper.appendChild(iframe);
+                modalBody.appendChild(wrapper);
             } else {
                 const img = document.createElement('img');
                 img.src = fileName;

@@ -169,11 +169,24 @@
 
         footer { text-align: center; padding: 2rem; border-top: 1px solid var(--glass-border); font-size: 0.9rem; }
 
+        /* Timeline Fixes (in case styles are shared) */
+        [dir="rtl"] .timeline-box ul {
+            direction: rtl;
+        }
+        [dir="rtl"] .timeline-box ul li {
+            direction: rtl;
+        }
+
         @media (max-width: 768px) {
             .hero-section h1 { font-size: 2.2rem; }
             .grid-2 { grid-template-columns: 1fr; }
             .content-box { padding: 2rem; }
             .hero-actions { flex-direction: column; align-items: center; }
+            
+            /* Fix for overlapping 2-column feature list on mobile */
+            .feature-list {
+                column-count: 1 !important;
+            }
         }
     </style>
 </head>
@@ -185,7 +198,7 @@
 
     <!-- Navbar -->
     <nav>
-        <div class="logo" data-i18n="logo">Ghaday.</div>
+        <div class="logo" data-i18n="logo">GS</div>
         <button class="lang-switch" id="langSwitch" aria-label="Toggle Language">
             <i class="fa-solid fa-globe"></i> <span id="langText">عربي</span>
         </button>
@@ -294,7 +307,7 @@
     <script>
         const translations = {
             en: {
-                logo: "Ghaday.",
+                logo: "GS",
                 btn_back: "Back to Portfolio",
                 hero_title: "POS Transactions Insights",
                 hero_subtitle: "Saudi National Bank (SNB)",
@@ -339,7 +352,7 @@
                 footer_text: "Ghadi Saeed. Case Study Document."
             },
             ar: {
-                logo: "غدي.",
+                logo: "غدي",
                 btn_back: "العودة إلى Portfolio",
                 hero_title: "رؤى عمليات نقاط البيع",
                 hero_subtitle: "Saudi National Bank (SNB)",
@@ -379,7 +392,7 @@
                 ch3_desc: "إنشاء تصفية متقاطعة (cross-filtering) دقيقة دون التسبب في تعارضات غامضة في العلاقات من واحد إلى متعدد (one-to-many cardinality).",
                 ch3_sol: "تم تحويل البيانات من نموذج تشغيلي (Transactional Model) إلى نموذج تحليلي (Analytical Model) من خلال تطبيق نموذج Star Schema، مما ساهم في تنظيم البيانات وتحسين أداء التحليل وإعداد التقارير.",
                 sec_outcomes: "النتائج والدروس المستفادة",
-                outcomes_p1: "قدم التسليم الناجح للوحة تحكم \"رؤى عمليات نقاط البيع\" لأصحاب المصلحة في SNB سرداً واضحاً ومبنياً على البيانات لسلوكيات إنفاق المستهلكين. أثبت المشروع قدرتي على أخذ البيانات المصرفية الخام والمجزأة وهندستها لتصبح لوحة تحكم موثوقة وجاهزة للأعمال.",
+                outcomes_p1: "قدم التسليم الناجح للوحة تحكم \"رؤى عمليات نقاط البيع\" لأصحاب المصلحة في SNB رؤية واضحة ومبنياً على البيانات لسلوكيات إنفاق المستهلكين. أثبت المشروع قدرتي على أخذ البيانات المصرفية الخام والمجزأة وهندستها لتصبح لوحة تحكم موثوقة وجاهزة للأعمال.",
                 outcomes_p2: "بعيداً عن التطوير التقني، سد هذا التدريب الفجوة بين النظرية الأكاديمية والتطبيق في الشركات. وقد أبرز الأهمية البالغة لحوكمة البيانات الصارمة، واختبارات ETL القوية، وفن سرد القصص بالبيانات — مما يثبت أن هندسة البيانات الناجحة تتمحور حول ترجمة المخططات المعقدة إلى قصص أعمال مقنعة وقابلة للتنفيذ.",
                 footer_text: "غدي سعيد. وثيقة دراسة حالة."
             }
