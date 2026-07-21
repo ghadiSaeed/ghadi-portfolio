@@ -854,8 +854,12 @@
             /* Responsive About Grid: Text first, Workflow second */
             #about .about-grid { display: flex; flex-direction: column; gap: 3rem; }
             
+            /* Fix for Experience & Education timeline on mobile */
             .timeline-time, .timeline-content-cell { display: block; width: 100%; border: none !important; text-align: left !important; padding: 10px 0 !important; }
-            [dir="rtl"] .timeline-time { text-align: right !important; }
+            
+            /* Fix RTL mobile text alignment for dates and card content */
+            [dir="rtl"] .timeline-time,
+            [dir="rtl"] .timeline-content-cell { text-align: right !important; }
         }
 
         @media (max-width: 768px) {
