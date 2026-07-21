@@ -302,30 +302,18 @@
             line-height: 1.8;
             list-style: none;
             padding: 0;
-            display: inline-block; /* Change to inline-block for proper centering */
-            text-align: left; /* Keep text left-aligned by default */
-        }
-        
-        [dir="rtl"] .hero-info-list {
-            text-align: right; /* RTL support */
         }
         
         .hero-info-list li {
             display: flex;
-            align-items: center; /* Center vertically on desktop */
+            align-items: center;
             gap: 0.8rem;
-            margin-bottom: 0.5rem;
         }
 
         .hero-info-list li i {
             width: 24px;
             text-align: center;
             display: inline-block;
-            flex-shrink: 0; /* Prevent icon from shrinking */
-        }
-
-        .hero-info-list li span {
-            display: block;
         }
 
         .hero-btns { 
@@ -860,7 +848,7 @@
         @media (max-width: 992px) {
             .hero-content { flex-direction: column-reverse; text-align: center; gap: 3rem; }
             .hero-btns { justify-content: center; }
-            /* Remove list centering from here to handle it specifically below */
+            .hero-info-list li { justify-content: center; }
             .glow-ring { width: 300px; height: 300px; }
             
             /* Responsive About Grid: Text first, Workflow second */
@@ -882,30 +870,9 @@
             .hero-btns .btn { padding: 0.75rem 1.2rem; font-size: 0.9rem; }
 
             /* Fix Hero Icon Alignment on Mobile */
-            .hero-text {
-                display: flex;
-                flex-direction: column;
-                align-items: center; 
-            }
-            
-            .hero-info-list {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                width: max-content;
-                max-width: 100%;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            
-            [dir="rtl"] .hero-info-list {
-                align-items: flex-start;
-            }
-
             .hero-info-list li {
                 align-items: flex-start; /* Align icon to the top of the text */
                 text-align: left;
-                width: 100%;
             }
             
             [dir="rtl"] .hero-info-list li {
@@ -913,7 +880,7 @@
             }
 
             .hero-info-list li i {
-                margin-top: 5px; /* Slight adjustment to match the first line of text */
+                margin-top: 4px; /* Slight adjustment to match the first line of text */
             }
 
             /* Skills Section Mobile */
@@ -1410,6 +1377,7 @@
         // ==========================================
         // 1. UI Interactions (Preloader & Scroll)
         // ==========================================
+        
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
             preloader.style.opacity = '0';
@@ -1629,7 +1597,7 @@
                 badge_production: "مشروع قيد التشغيل",
                 badge_acad_ai: "مشاريع أكاديمية وتطبيقات ذكاء اصطناعي",
                 badge_web: "مشاريع الويب",
-                badge_acad_snb: "مشاريع أكاديمية وتتدريب البنك الأهلي",
+                badge_acad_snb: "مشاريع أكاديمية وتدريب البنك الأهلي",
                 badge_prof_cert: "مشاريع مهنية وشهادات",
                 badge_multiple: "مشاريع متعددة",
                 badge_ui_ux: "مشاريع تصميم الواجهات",
@@ -1744,11 +1712,7 @@
             // Render as iframe for PDF or img for image files
             if (fileName.toLowerCase().endsWith('.pdf')) {
                 const iframe = document.createElement('iframe');
-                
-                // Fix: Append URL parameters to force the native PDF viewer to scale and fit the document
-                // This forces standard PDF viewers to hide toolbars and cleanly "contain" the document like an image
-                iframe.src = fileName + '#toolbar=0&navpanes=0&scrollbar=0&view=Fit';
-                
+                iframe.src = fileName;
                 // Add a wrapping div for responsive iframe handling
                 const wrapper = document.createElement('div');
                 wrapper.style.width = '100%';
